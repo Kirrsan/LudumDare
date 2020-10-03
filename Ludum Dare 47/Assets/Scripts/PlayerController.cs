@@ -5,16 +5,18 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-
     private Rigidbody _rb;
     
     private ICapacity _capacity;
     private Jump _jumpCapacity;
     private Hide _hideCapacity;
 
+    private bool _isOnGround;
+
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
+        _isOnGround = true;
     }
 
     // Start is called before the first frame update
@@ -35,7 +37,7 @@ public class PlayerController : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            _capacity.UseCapacity(rb);
+            _capacity.UseCapacity(rb, _isOnGround);
         }
 
         //switch Test
@@ -56,5 +58,21 @@ public class PlayerController : MonoBehaviour
     public void SetCapacityWall()
     {
         //_capacity = WallRunScript;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Sol"))
+        {
+            _isOnGround = true;
+        }
+    }
+    
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Sol"))
+        {
+            _isOnGround = false;
+        }
     }
 }
