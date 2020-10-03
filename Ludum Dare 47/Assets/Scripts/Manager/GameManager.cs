@@ -12,7 +12,6 @@ public class GameManager : MonoBehaviour
 
     public State state;
     public System.Action onStateChange;
-    public int deathCounter = 0;
 
     private void Awake()
     {

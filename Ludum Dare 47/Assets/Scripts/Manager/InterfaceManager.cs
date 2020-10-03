@@ -43,6 +43,7 @@ public class InterfaceManager : MonoBehaviour
 
     private void GoInpause()
     {
+        Time.timeScale = 0;
         _gamePanel.SetActive(false);
         _pausePanel.SetActive(true);
     }
@@ -53,6 +54,7 @@ public class InterfaceManager : MonoBehaviour
         _winPanel.SetActive(false);
         _loosePanel.SetActive(false);
         _gamePanel.SetActive(true);
+        Time.timeScale = 1;
     }
 
     private void GoToWin()
@@ -64,6 +66,7 @@ public class InterfaceManager : MonoBehaviour
 
     private void GoToLoose()
     {
+        Time.timeScale = 0;
         _gamePanel.SetActive(false);
         _pausePanel.SetActive(false);
         _loosePanel.SetActive(true);
@@ -74,15 +77,18 @@ public class InterfaceManager : MonoBehaviour
     public void Resume()
     {
         GameManager.instance.ChangeState(State.INGAME);
+        Time.timeScale = 1;
     }
 
     public void Retry()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Time.timeScale = 1;
     }
     public void BackToMenu()
     {
         SceneManager.LoadScene(0);
+        Time.timeScale = 1;
     }
 
     #endregion

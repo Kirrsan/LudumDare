@@ -26,13 +26,10 @@ public class PlayerController : MonoBehaviour {
 
     private GravityDirection gravityDirection = GravityDirection.Down;
 
-    private Vector3 _startPosition;
-
     private void Awake() {
         rigidbody = GetComponent<Rigidbody>();
         playerMovement = GetComponent<PlayerMovement>();
         levelManager = FindObjectOfType<LevelManager>();
-        _startPosition = transform.position;
     }
 
     private void Update() {
@@ -46,11 +43,7 @@ public class PlayerController : MonoBehaviour {
     void GameOver(bool isLost) {
         if (isLost) {
             Debug.Log("GAME OVER");
-            transform.position = _startPosition;
-            GameManager.instance.deathCounter++;
-            levelManager.ResetWorld();
-            playerMovement.currentSpeed = playerMovement.baseSpeed;
-            SetGravity(GravityDirection.Down);
+            GameManager.instance.ChangeState(State.LOOSE);
         }
     }
 

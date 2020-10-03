@@ -1752,7 +1752,7 @@ MonoBehaviour:
   _gamePanel: {fileID: 7693165779155621537}
   _pausePanel: {fileID: 7693165779849944275}
   _winPanel: {fileID: 7693165779431690244}
-  _loosePanel: {fileID: 0}
+  _loosePanel: {fileID: 8002410635348299718}
 --- !u!1 &7719755470245625964
 GameObject:
   m_ObjectHideFlags: 0
@@ -1900,7 +1900,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8870291125052440577
 RectTransform:
   m_ObjectHideFlags: 0
