@@ -16,7 +16,7 @@ public class SpeedLinesBehaviour : MonoBehaviour
 
     private bool[] _pallierReached;
 
-    [SerializeField] private ParticleSystem _system;
+    private ParticleSystem _system;
 
     private int _currentPallier;
 
@@ -24,6 +24,8 @@ public class SpeedLinesBehaviour : MonoBehaviour
     void Start()
     {
         _playerMovement = GetComponent<PlayerMovement>();
+
+        _system = GetComponent<ParticleSystem>();
 
         _pallierReached = new bool[_speedPallier.Length];
         for (int i = 0; i < _pallierReached.Length; i++)
@@ -35,7 +37,7 @@ public class SpeedLinesBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _speed = _playerMovement.GetSpeed();
+        // _speed = _playerMovement.speedMultiplier;
         if (_currentPallier < _speedPallier.Length)
         {
             if (_speed >= _speedPallier[_currentPallier] && !_pallierReached[_currentPallier])
