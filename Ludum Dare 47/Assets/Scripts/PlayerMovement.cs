@@ -17,4 +17,9 @@ public class PlayerMovement : MonoBehaviour {
     private void Update() {
         rigidbody.velocity = new Vector3(rigidbody.velocity.x, rigidbody.velocity.y, Speed);
     }
+
+    public float GetSpeed()
+    {
+        return Speed;
+    }
 }
