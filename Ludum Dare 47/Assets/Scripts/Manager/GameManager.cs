@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.XR.WSA.Persistence;
 
 public enum State { PAUSE, INGAME, WIN, LOOSE }
 public class GameManager : MonoBehaviour
@@ -44,5 +46,16 @@ public class GameManager : MonoBehaviour
     {
         state = newState;
         if (onStateChange != null) onStateChange.Invoke();
+
+        else if (newState == State.LOOSE)
+        {
+           ReloadScene();
+        }
+
+    }
+
+    private void ReloadScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

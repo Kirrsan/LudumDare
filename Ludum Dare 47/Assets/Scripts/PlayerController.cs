@@ -5,6 +5,7 @@ public class PlayerController : MonoBehaviour {
     [SerializeField, Min(0)] private float jumpForce = 20f;
     [SerializeField] private LayerMask ground;
     [SerializeField] private Bounds groundCheckBounds;
+    [SerializeField] private Transform[] killLimit;
 
     private ICapacity[] capacities = {new DoubleJump(), new WallRun()};
 
@@ -32,7 +33,27 @@ public class PlayerController : MonoBehaviour {
     private void Update() {
         if (Input.GetKeyDown(KeyCode.Space))
             capacities[levelManager.CurrentWorld].UseCapacity(this);
+        GameOver(CheckLoseCondition());
     }
+
+    #region WinLoseCondition
+    void GameOver(bool isLost)
+    {
+        if (isLost)
+        {
+            Debug.Log("GAME OVER");
+            GameManager.instance.ChangeState(State.LOOSE);
+        }
+    }
+
+    bool CheckLoseCondition()
+    {
+        if (transform.position.y < killLimit[0].position.y || transform.position.x < killLimit[1].position.x || transform.position.x > killLimit[2].position.x)
+            return true;
+        return false;
+    }
+    #endregion
+
 
     private void FixedUpdate() {
         isGrounded = GroundCheck();
