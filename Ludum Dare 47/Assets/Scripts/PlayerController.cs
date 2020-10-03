@@ -66,6 +66,12 @@ public class PlayerController : MonoBehaviour
         {
             _isOnGround = true;
         }
+
+        else if (other.CompareTag("KillZone"))
+            GameManager.instance.ChangeState(State.LOOSE);
+
+        else if (other.CompareTag("Win"))
+            GameManager.instance.ChangeState(State.WIN);
     }
     
     private void OnTriggerExit(Collider other)
@@ -75,4 +81,5 @@ public class PlayerController : MonoBehaviour
             _isOnGround = false;
         }
     }
+
 }
