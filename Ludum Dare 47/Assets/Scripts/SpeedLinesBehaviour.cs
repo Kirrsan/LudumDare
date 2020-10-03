@@ -12,14 +12,12 @@ public class SpeedLinesBehaviour : MonoBehaviour {
 
     private bool[] _pallierReached;
 
-    private ParticleSystem _system;
+    [SerializeField] private ParticleSystem _system;
 
     private int _currentPallier;
 
     void Start() {
         _playerMovement = GetComponent<PlayerMovement>();
-
-        _system = GetComponent<ParticleSystem>();
 
         _pallierReached = new bool[_speedPallier.Length];
         for (int i = 0; i < _pallierReached.Length; i++) {

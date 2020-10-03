@@ -177,6 +177,7 @@ MonoBehaviour:
   - 100
   - 125
   - 150
+  _system: {fileID: 4938616713201052797}
 --- !u!1 &8103559936592098101
 GameObject:
   m_ObjectHideFlags: 0
@@ -333,6 +334,12 @@ PrefabInstance:
 --- !u!4 &4938616713201052770 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8346329145831506270, guid: 4654bc50a3ec56843962a18663ce1ff0,
+    type: 3}
+  m_PrefabInstance: {fileID: 3989454380341472572}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &4938616713201052797 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8346329145831506241, guid: 4654bc50a3ec56843962a18663ce1ff0,
     type: 3}
   m_PrefabInstance: {fileID: 3989454380341472572}
   m_PrefabAsset: {fileID: 0}
