@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Jump : ICapacity
 {
-    public void UseCapacity()
+    public void UseCapacity(Rigidbody rb)
     {
         Debug.Log("jump");
     }

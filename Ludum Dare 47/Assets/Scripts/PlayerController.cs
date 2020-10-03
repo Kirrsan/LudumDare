@@ -1,13 +1,21 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
 
+    private Rigidbody _rb;
+    
     private ICapacity _capacity;
     private Jump _jumpCapacity;
     private Hide _hideCapacity;
+
+    private void Awake()
+    {
+        _rb = GetComponent<Rigidbody>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -20,14 +28,14 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CheckInput();
+        CheckInput(_rb);
     }
     
-    void CheckInput()
+    void CheckInput(Rigidbody rb)
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            _capacity.UseCapacity();
+            _capacity.UseCapacity(rb);
         }
 
         //switch Test

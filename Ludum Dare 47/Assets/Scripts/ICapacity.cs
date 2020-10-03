@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface ICapacity
 {
-    void UseCapacity();
+    void UseCapacity(Rigidbody rb);
 }
