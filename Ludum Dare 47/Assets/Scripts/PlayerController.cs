@@ -26,6 +26,8 @@ public class PlayerController : MonoBehaviour {
 
     private GravityDirection gravityDirection = GravityDirection.Down;
 
+    [SerializeField] private ParticleSystem dustCloud;
+
     private void Awake() {
         rigidbody = GetComponent<Rigidbody>();
         playerMovement = GetComponent<PlayerMovement>();
@@ -109,6 +111,11 @@ public class PlayerController : MonoBehaviour {
 
         else if (other.CompareTag("WinZone"))
             GameManager.instance.ChangeState(State.WIN);
+
+        else if (other.CompareTag("Sol"))
+        {
+            dustCloud.Play();
+        }
     }
 }
 
