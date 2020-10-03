@@ -1,14 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class InterfaceManager : MonoBehaviour
 {
 
-    [SerializeField] private GameObject gamePanel;
-    [SerializeField] private GameObject pausePanel;
-    [SerializeField] private GameObject winPanel;
-    [SerializeField] private GameObject loosePanel;
+    [SerializeField] private GameObject _gamePanel;
+    [SerializeField] private GameObject _pausePanel;
+    [SerializeField] private GameObject _winPanel;
+    [SerializeField] private GameObject _loosePanel;
 
     // Start is called before the first frame update
     void Start()
@@ -34,15 +35,33 @@ public class InterfaceManager : MonoBehaviour
 
     private void GoInpause()
     {
-        gamePanel.SetActive(false);
-        pausePanel.SetActive(true);
+        _gamePanel.SetActive(false);
+        _pausePanel.SetActive(true);
     }
 
     private void GoToGame()
     {
-        pausePanel.SetActive(false);
-        winPanel.SetActive(false);
-        loosePanel.SetActive(false);
-        gamePanel.SetActive(true);
+        _pausePanel.SetActive(false);
+        _winPanel.SetActive(false);
+        _loosePanel.SetActive(false);
+        _gamePanel.SetActive(true);
     }
+
+    #region Button Functions
+
+    public void Resume()
+    {
+        GameManager.instance.ChangeState(State.INGAME);
+    }
+
+    public void Retry()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    #endregion
 }
