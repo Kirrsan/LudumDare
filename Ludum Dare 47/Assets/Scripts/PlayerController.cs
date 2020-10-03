@@ -61,6 +61,12 @@ public class PlayerController : MonoBehaviour {
                 rigidbody.velocity = new Vector3(-jumpForce, rigidbody.velocity.y, rigidbody.velocity.z);
                 break;
         }
+
+        else if (other.CompareTag("KillZone"))
+            GameManager.instance.ChangeState(State.LOOSE);
+
+        else if (other.CompareTag("Win"))
+            GameManager.instance.ChangeState(State.WIN);
     }
 
     public void SetGravity(GravityDirection direction) {
@@ -80,6 +86,7 @@ public class PlayerController : MonoBehaviour {
                 break;
         }
     }
+
 }
 
 public enum GravityDirection {
