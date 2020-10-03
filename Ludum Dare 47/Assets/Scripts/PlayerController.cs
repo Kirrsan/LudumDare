@@ -6,6 +6,8 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] private LayerMask ground;
     [SerializeField] private Bounds groundCheckBounds;
     [SerializeField] private Transform[] killLimit;
+    [SerializeField] private Vector3 groundCheckCenter;
+    [SerializeField] private float groundCheckRadius;
 
     private ICapacity[] capacities = {new DoubleJump(), new WallRun()};
 
@@ -37,21 +39,20 @@ public class PlayerController : MonoBehaviour {
     }
 
     #region WinLoseCondition
-    void GameOver(bool isLost)
-    {
-        if (isLost)
-        {
+
+    void GameOver(bool isLost) {
+        if (isLost) {
             Debug.Log("GAME OVER");
             GameManager.instance.ChangeState(State.LOOSE);
         }
     }
 
-    bool CheckLoseCondition()
-    {
+    bool CheckLoseCondition() {
         if (transform.position.y < killLimit[0].position.y || transform.position.x < killLimit[1].position.x || transform.position.x > killLimit[2].position.x)
             return true;
         return false;
     }
+
     #endregion
 
 
@@ -62,10 +63,10 @@ public class PlayerController : MonoBehaviour {
 
     private bool GroundCheck() =>
         rigidbody.velocity.y <= 0.01f
-        && Physics.CheckBox(transform.position + groundCheckBounds.center, groundCheckBounds.extents, transform.rotation, ground);
+        && Physics.CheckSphere(transform.position + groundCheckCenter, groundCheckRadius, ground);
 
     private void OnDrawGizmos() {
-        Gizmos.DrawWireCube(transform.position + groundCheckBounds.center, groundCheckBounds.size);
+        Gizmos.DrawWireSphere(transform.position + groundCheckCenter, groundCheckRadius);
         Gizmos.DrawRay(transform.position, 5 * (transform.forward - transform.right));
         Gizmos.DrawRay(transform.position, 5 * (transform.forward + transform.right));
     }
@@ -82,8 +83,6 @@ public class PlayerController : MonoBehaviour {
                 rigidbody.velocity = new Vector3(-jumpForce, rigidbody.velocity.y, rigidbody.velocity.z);
                 break;
         }
-
-        
     }
 
     public void SetGravity(GravityDirection direction) {
@@ -104,12 +103,11 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    void OnTriggerEnter(Collider other)
-    {
+    void OnTriggerEnter(Collider other) {
         if (other.CompareTag("KillZone"))
             GameManager.instance.ChangeState(State.LOOSE);
 
-        else if (other.CompareTag("Win"))
+        else if (other.CompareTag("WinZone"))
             GameManager.instance.ChangeState(State.WIN);
     }
 }
