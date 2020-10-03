@@ -7,13 +7,20 @@ public class PlayerMovement : MonoBehaviour {
 
     public float Speed => baseSpeed;
 
+    public float currentSpeed = 0;
+
     private new Rigidbody rigidbody;
 
     private void Awake() {
         rigidbody = GetComponent<Rigidbody>();
     }
 
+    private void Start()
+    {
+        currentSpeed = baseSpeed;
+    }
+
     private void Update() {
-        rigidbody.velocity = new Vector3(rigidbody.velocity.x, rigidbody.velocity.y, Speed);
+        rigidbody.velocity = new Vector3(rigidbody.velocity.x, rigidbody.velocity.y, currentSpeed);
     }
 }

@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
 
     public State state;
     public System.Action onStateChange;
+    public int deathCounter = 0;
 
     private void Awake()
     {
@@ -46,16 +47,5 @@ public class GameManager : MonoBehaviour
     {
         state = newState;
         if (onStateChange != null) onStateChange.Invoke();
-
-        else if (newState == State.LOOSE)
-        {
-           ReloadScene();
-        }
-
-    }
-
-    private void ReloadScene()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

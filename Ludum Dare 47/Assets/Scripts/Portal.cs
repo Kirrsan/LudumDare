@@ -28,7 +28,7 @@ public class Portal : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            playerMovement.baseSpeed *= addSpeed;
+            playerMovement.currentSpeed *= addSpeed;
             lvlManager.ActivateNextWorld();
 
         }
