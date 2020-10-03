@@ -9,15 +9,15 @@ public class LevelManager : MonoBehaviour {
 
     private PlayerController player;
 
-    private void Awake() {
+    /*private void Awake() {
         player = FindObjectOfType<PlayerController>();
-    }
+    }*/
 
     private void Start() {
         UpdateWorlds();
     }
 
-    private void Update() {
+    /*private void Update() {
         if (currentWorld == 0 && player.transform.position.z > 55)
             ActivateNextWorld();
         else if (currentWorld == 1 && player.transform.position.z > 96) {
@@ -26,7 +26,7 @@ public class LevelManager : MonoBehaviour {
             player.SetGravity(GravityDirection.Down);
             player.PlayerMovement.speedMultiplier += 0.25f;
         }
-    }
+    }*/
 
     private void UpdateWorlds() {
         for (var i = 0; i < worlds.Length; i++) {
