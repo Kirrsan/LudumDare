@@ -6,7 +6,9 @@ public class Portal : MonoBehaviour
 {
 
     BoxCollider boxCollider;
+    public PlayerMovement playerMovement;
     public LevelManager lvlManager;
+    public float addSpeed;
 
     // Start is called before the first frame update
     void Start()
@@ -26,10 +28,11 @@ public class Portal : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name == "Player")
+        if (other.gameObject.CompareTag("Player"))
         {
-            
+            playerMovement.baseSpeed *= addSpeed;
             lvlManager.ActivateNextWorld();
+
         }
     }
 }

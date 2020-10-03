@@ -1,78 +1,96 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class PlayerController : MonoBehaviour
-{
-    private Rigidbody _rb;
-    
-    private ICapacity _capacity;
-    private Jump _jumpCapacity;
-    private Hide _hideCapacity;
+[RequireComponent(typeof(Rigidbody))]
+public class PlayerController : MonoBehaviour {
+    [SerializeField, Min(0)] private float jumpForce = 20f;
+    [SerializeField] private LayerMask ground;
+    [SerializeField] private Bounds groundCheckBounds;
 
-    private bool _isOnGround;
+    private ICapacity[] capacities = {new DoubleJump(), new WallRun()};
 
-    private void Awake()
-    {
-        _rb = GetComponent<Rigidbody>();
-        _isOnGround = true;
+    private LevelManager levelManager;
+
+    private new Rigidbody rigidbody;
+    public Rigidbody Rigidbody => rigidbody;
+
+    private PlayerMovement playerMovement;
+    public PlayerMovement PlayerMovement => playerMovement;
+
+    [SerializeField] private bool isGrounded;
+    public bool IsGrounded => isGrounded;
+
+    public LayerMask Ground => ground;
+
+    private GravityDirection gravityDirection = GravityDirection.Down;
+
+    private void Awake() {
+        rigidbody = GetComponent<Rigidbody>();
+        playerMovement = GetComponent<PlayerMovement>();
+        levelManager = FindObjectOfType<LevelManager>();
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        _jumpCapacity = new Jump();
-        _hideCapacity = new Hide();
-        _capacity = _jumpCapacity;
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.Space))
+            capacities[levelManager.CurrentWorld].UseCapacity(this);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        CheckInput(_rb);
+    private void FixedUpdate() {
+        isGrounded = GroundCheck();
+        capacities[levelManager.CurrentWorld].Update(this);
     }
-    
-    void CheckInput(Rigidbody rb)
-    {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            _capacity.UseCapacity(rb, _isOnGround);
+
+    private bool GroundCheck() =>
+        rigidbody.velocity.y <= 0.01f
+        && Physics.CheckBox(transform.position + groundCheckBounds.center, groundCheckBounds.extents, transform.rotation, ground);
+
+    private void OnDrawGizmos() {
+        Gizmos.DrawWireCube(transform.position + groundCheckBounds.center, groundCheckBounds.size);
+        Gizmos.DrawRay(transform.position, 5 * (transform.forward - transform.right));
+        Gizmos.DrawRay(transform.position, 5 * (transform.forward + transform.right));
+    }
+
+    public void Jump() {
+        switch (gravityDirection) {
+            case GravityDirection.Down:
+                rigidbody.velocity = new Vector3(rigidbody.velocity.x, jumpForce, rigidbody.velocity.z);
+                break;
+            case GravityDirection.Left:
+                rigidbody.velocity = new Vector3(jumpForce, rigidbody.velocity.y, rigidbody.velocity.z);
+                break;
+            case GravityDirection.Right:
+                rigidbody.velocity = new Vector3(-jumpForce, rigidbody.velocity.y, rigidbody.velocity.z);
+                break;
         }
 
-        //switch Test
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            if (_capacity == _jumpCapacity)
-                _capacity = _hideCapacity;
-            else if (_capacity == _hideCapacity)
-                _capacity = _jumpCapacity;
+        else if (other.CompareTag("KillZone"))
+            GameManager.instance.ChangeState(State.LOOSE);
+
+        else if (other.CompareTag("Win"))
+            GameManager.instance.ChangeState(State.WIN);
+    }
+
+    public void SetGravity(GravityDirection direction) {
+        gravityDirection = direction;
+        switch (direction) {
+            case GravityDirection.Down:
+                Physics.gravity = new Vector3(0, -Physics.gravity.magnitude, 0);
+                rigidbody.velocity = new Vector3(0, 0, rigidbody.velocity.z);
+                break;
+            case GravityDirection.Left:
+                Physics.gravity = new Vector3(-Physics.gravity.magnitude, 0, 0);
+                rigidbody.velocity = new Vector3(0, 0, rigidbody.velocity.z);
+                break;
+            case GravityDirection.Right:
+                Physics.gravity = new Vector3(Physics.gravity.magnitude, 0, 0);
+                rigidbody.velocity = new Vector3(0, 0, rigidbody.velocity.z);
+                break;
         }
     }
 
-    public void SetCapacityDoubleJump()
-    {
-        //_capacity = doubleJumpScript;
-    }
-    
-    public void SetCapacityWall()
-    {
-        //_capacity = WallRunScript;
-    }
+}
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Sol"))
-        {
-            _isOnGround = true;
-        }
-    }
-    
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Sol"))
-        {
-            _isOnGround = false;
-        }
-    }
+public enum GravityDirection {
+    Down,
+    Left,
+    Right
 }
