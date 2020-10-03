@@ -26,7 +26,7 @@ public class SpeedLinesBehaviour : MonoBehaviour {
     }
 
     void Update() {
-        _speed = _playerMovement.Speed;
+        _speed = _playerMovement.currentSpeed;
         if (_currentPallier < _speedPallier.Length) {
             if (_speed >= _speedPallier[_currentPallier] && !_pallierReached[_currentPallier]) {
                 _pallierReached[_currentPallier] = true;
