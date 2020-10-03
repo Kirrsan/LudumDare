@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public interface ICapacity
-{
-    void UseCapacity(Rigidbody rb, bool onGround);
+﻿public interface ICapacity {
+    void Update(PlayerController player);
+    void UseCapacity(PlayerController player);
 }
