@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Hide : ICapacity
 {
-    public void UseCapacity(Rigidbody rb)
+    public void UseCapacity(Rigidbody rb,bool onGround)
     {
         Debug.Log("hide");
     }

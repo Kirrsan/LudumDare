@@ -23,6 +23,14 @@ public class InterfaceManager : MonoBehaviour
             {
                 GoToGame();
             }
+            else if (GameManager.instance.state == State.WIN)
+            {
+                GoToWin();
+            }
+            else if (GameManager.instance.state == State.LOOSE)
+            {
+                GoToLoose();
+            }
         };
         GoToGame();
     }
@@ -45,6 +53,20 @@ public class InterfaceManager : MonoBehaviour
         _winPanel.SetActive(false);
         _loosePanel.SetActive(false);
         _gamePanel.SetActive(true);
+    }
+
+    private void GoToWin()
+    {
+        _gamePanel.SetActive(false);
+        _pausePanel.SetActive(false);
+        _winPanel.SetActive(true);
+    }
+
+    private void GoToLoose()
+    {
+        _gamePanel.SetActive(false);
+        _pausePanel.SetActive(false);
+        _loosePanel.SetActive(true);
     }
 
     #region Button Functions
