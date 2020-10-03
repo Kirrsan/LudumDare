@@ -2,11 +2,11 @@
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour {
-    [SerializeField, Min(0)] private float baseSpeed;
+    /*[SerializeField, Min(0)] private*/public float baseSpeed = 5.0f;
 
-    public float speedMultiplier = 1f;
+    //public float speedMultiplier = 1f;
 
-    private float Speed => baseSpeed * speedMultiplier;
+    private float Speed => baseSpeed /** speedMultiplier*/;
 
     private new Rigidbody rigidbody;
 
