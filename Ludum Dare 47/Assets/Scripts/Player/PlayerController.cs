@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody)), RequireComponent(typeof(PlayerMovement))]
@@ -7,8 +8,14 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] private Vector3 respawnPosition = new Vector3(0, 50, -20);
     [SerializeField] private LayerMask ground;
     [SerializeField] private Bounds killLimit;
-    [SerializeField] private Vector3 groundCheckCenter;
-    [SerializeField] private float groundCheckRadius;
+
+    [System.Serializable]
+    private struct Sphere {
+        public Vector3 center;
+        public float radius;
+    }
+
+    [SerializeField] private Sphere[] sphereCasts;
 
     private readonly ICapacity[] capacities = {new DoubleJump(), new WallRun()};
 
@@ -80,7 +87,7 @@ public class PlayerController : MonoBehaviour {
 
     private bool GroundCheck() =>
         rigidbody.velocity.y <= 0.01f
-        && Physics.CheckSphere(transform.position + groundCheckCenter, groundCheckRadius, ground);
+        && sphereCasts.Any(s => Physics.CheckSphere(transform.position + s.center, s.radius, ground));
 
     public void Jump() {
         switch (gravityDirection) {
@@ -151,7 +158,10 @@ public class PlayerController : MonoBehaviour {
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(killLimit.center, killLimit.extents);
         Gizmos.color = Color.white;
-        Gizmos.DrawWireSphere(transform.position + groundCheckCenter, groundCheckRadius);
+
+        foreach (var sphere in sphereCasts)
+            Gizmos.DrawWireSphere(transform.position + sphere.center, sphere.radius);
+
         Gizmos.DrawRay(transform.position, 5 * (transform.forward - transform.right));
         Gizmos.DrawRay(transform.position, 5 * (transform.forward + transform.right));
     }

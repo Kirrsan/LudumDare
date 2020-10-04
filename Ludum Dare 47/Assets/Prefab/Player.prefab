@@ -5085,8 +5085,17 @@ MonoBehaviour:
   killLimit:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 40, y: 40, z: 10000}
-  groundCheckCenter: {x: 0, y: -0.54, z: 0}
-  groundCheckRadius: 0.49
+  sphereCasts:
+  - center: {x: 0, y: -0.535, z: 0}
+    radius: 0.47
+  - center: {x: 0.27, y: 0.5, z: 0}
+    radius: 0.25
+  - center: {x: 0.27, y: -0.5, z: 0}
+    radius: 0.25
+  - center: {x: -0.27, y: 0.5, z: 0}
+    radius: 0.25
+  - center: {x: -0.27, y: -0.5, z: 0}
+    radius: 0.25
   isGrounded: 0
   dustCloud: {fileID: 2661837140042427254}
 --- !u!114 &2059947405540949763
