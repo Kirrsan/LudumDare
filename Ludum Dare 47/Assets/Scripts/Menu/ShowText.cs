@@ -7,6 +7,17 @@ public class ShowText : MonoBehaviour
 
     [SerializeField] private GameObject _text;
     private bool _hasShownText = false;
+    private Quaternion clogStartRotation;
+
+    private void Start()
+    {
+        clogStartRotation = transform.GetChild(0).rotation;
+    }
+
+    public void ResetRotation()
+    {
+        transform.GetChild(0).rotation = clogStartRotation;
+    }
 
 
     public void MakeTextAppear()
@@ -20,7 +31,6 @@ public class ShowText : MonoBehaviour
     }
     public void MakeTextDisappear()
     {
-        print("kfsl,:dw;");
         if (_hasShownText)
         {
             _hasShownText = false;
