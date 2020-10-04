@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
@@ -28,7 +29,7 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-
+        Play("Music");
     }
 
     public void Play(string name)
@@ -53,7 +54,7 @@ public class AudioManager : MonoBehaviour
         }
         fx.source.Stop();
     }
-
+    
     public float GetClipLength(string name)
     {
         SoundEffect fx = Array.Find(soundEffects, sound => sound.clipName == name);
@@ -63,5 +64,53 @@ public class AudioManager : MonoBehaviour
             return 0;
         }
         return fx.source.clip.length;
+    }
+
+    public void SpeedMusicUp(float pitchWanted)
+    {
+        StartCoroutine(IncreasePitch(pitchWanted));
+    }
+
+    public void SlowMusicDown(float pitchWanted)
+    {
+        StartCoroutine(DecreasePitch(pitchWanted));
+    }
+
+    private IEnumerator IncreasePitch(float pitchWanted)
+    {
+        SoundEffect fx = Array.Find(soundEffects, sound => sound.clipName == "Music");
+        if (fx == null)
+        {
+            Debug.Log("/!\\ Sound : " + name + "not found /!\\");
+        }
+        if (fx.source.pitch + 0.05f <= pitchWanted)
+        {
+            fx.source.pitch += 0.05f;
+            yield return new WaitForSeconds(0.3f);
+            StartCoroutine(IncreasePitch(pitchWanted));
+        }
+        else
+        {
+            fx.source.pitch = pitchWanted;
+        }
+    }
+
+    private IEnumerator DecreasePitch(float pitchWanted)
+    {
+        SoundEffect fx = Array.Find(soundEffects, sound => sound.clipName == "Music");
+        if (fx == null)
+        {
+            Debug.Log("/!\\ Sound : " + name + "not found /!\\");
+        }
+        if (fx.source.pitch - 0.05f >= pitchWanted)
+        {
+            fx.source.pitch -= 0.05f;
+            yield return new WaitForSeconds(0.3f);
+            StartCoroutine(DecreasePitch(pitchWanted));
+        }
+        else
+        {
+            fx.source.pitch = pitchWanted;
+        }
     }
 }
