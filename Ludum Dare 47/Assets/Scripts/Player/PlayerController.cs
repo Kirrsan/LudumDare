@@ -3,7 +3,10 @@ using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody)), RequireComponent(typeof(PlayerMovement))]
-public class PlayerController : MonoBehaviour {
+public class PlayerController : MonoBehaviour
+{
+    public static Animator animator;
+
     [SerializeField, Min(0)] private float jumpForce = 20f;
     [SerializeField] private Vector3 respawnPosition = new Vector3(0, 50, -20);
     [SerializeField] private LayerMask ground;
@@ -41,6 +44,7 @@ public class PlayerController : MonoBehaviour {
         rigidbody = GetComponent<Rigidbody>();
         playerMovement = GetComponent<PlayerMovement>();
         levelManager = FindObjectOfType<LevelManager>();
+        animator = GetComponent<Animator>();
     }
 
     private void Start() {
@@ -66,6 +70,8 @@ public class PlayerController : MonoBehaviour {
             levelManager.Reset();
             Reset();
         }
+        animator.SetFloat("Velocity Y", rigidbody.velocity.y);
+        animator.SetBool("IsGrounded", isGrounded);
     }
 
     private void FixedUpdate() {
