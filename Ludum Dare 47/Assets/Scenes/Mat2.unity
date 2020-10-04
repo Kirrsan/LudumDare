@@ -650,6 +650,11 @@ PrefabInstance:
       propertyPath: worlds.Array.data[1]
       value: 
       objectReference: {fileID: 326800681}
+    - target: {fileID: 9217035637617809187, guid: ee9e9b5922b38d340b128d13458b455d,
+        type: 3}
+      propertyPath: currentWorld
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee9e9b5922b38d340b128d13458b455d, type: 3}
 --- !u!1 &1436648852

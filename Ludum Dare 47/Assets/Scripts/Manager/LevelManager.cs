@@ -5,7 +5,7 @@ public class LevelManager : MonoBehaviour {
 
     [SerializeField] private GameObject[] worlds;
 
-    private int currentWorld;
+    [SerializeField] int currentWorld = 0;
 
     public int CurrentWorld => currentWorld;
 
