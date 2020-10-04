@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour {
@@ -26,10 +27,23 @@ public class PlayerController : MonoBehaviour {
 
     [SerializeField] private ParticleSystem dustCloud;
 
+    private bool _gameStartDelay = false;
+
     private void Awake() {
         rigidbody = GetComponent<Rigidbody>();
         playerMovement = GetComponent<PlayerMovement>();
         levelManager = FindObjectOfType<LevelManager>();
+    }
+
+    private void Start()
+    {
+        StartCoroutine(WaitAndStart());
+    }
+
+    private IEnumerator WaitAndStart()
+    {
+        yield return new WaitForSeconds(0.3f);
+        _gameStartDelay = true;
     }
 
     private void Update() {
@@ -48,6 +62,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void Reset() {
+        AudioManager.instance.Play("Rewind");
         playerMovement.speedMultiplier = 1f;
         SetGravity(GravityDirection.Down);
     }
@@ -109,7 +124,8 @@ public class PlayerController : MonoBehaviour {
         else if (other.CompareTag("WinZone"))
             GameManager.instance.ChangeState(State.WIN);
 
-        else if (other.CompareTag("Sol")) {
+        else if (other.CompareTag("Sol") && _gameStartDelay) {
+            AudioManager.instance.Play("Landing");
             dustCloud.Play();
         }
     }

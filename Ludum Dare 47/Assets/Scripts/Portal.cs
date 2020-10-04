@@ -12,6 +12,7 @@ public class Portal : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other) {
         if (other.gameObject.CompareTag("Player")) {
+            AudioManager.instance.Play("Portal");
             playerMovement.speedMultiplier = addSpeed;
             lvlManager.ActivateNextWorld();
         }
