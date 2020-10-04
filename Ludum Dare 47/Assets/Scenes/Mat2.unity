@@ -234,7 +234,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &326800682
 Transform:
   m_ObjectHideFlags: 0
@@ -662,7 +662,7 @@ GameObject:
   - component: {fileID: 1436648854}
   m_Layer: 8
   m_Name: Plane (4)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -675,8 +675,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1436648852}
   m_LocalRotation: {x: -0, y: -0, z: -0.7071065, w: 0.7071071}
-  m_LocalPosition: {x: -3.5, y: 3, z: 67.95}
-  m_LocalScale: {x: 0.3, y: 1, z: 2}
+  m_LocalPosition: {x: -3.5, y: 3, z: 87.556}
+  m_LocalScale: {x: 0.3, y: 1, z: 1.0708262}
   m_Children: []
   m_Father: {fileID: 326800682}
   m_RootOrder: 0
@@ -767,7 +767,7 @@ GameObject:
   - component: {fileID: 1572919124}
   m_Layer: 8
   m_Name: Plane (5)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -780,8 +780,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1572919122}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 3.5, y: 3, z: 85.7}
-  m_LocalScale: {x: 0.3, y: 1, z: 2}
+  m_LocalPosition: {x: 3.5, y: 3, z: 75.653}
+  m_LocalScale: {x: 0.3, y: 1, z: 4.0092654}
   m_Children: []
   m_Father: {fileID: 326800682}
   m_RootOrder: 1
@@ -1198,6 +1198,11 @@ PrefabInstance:
       propertyPath: killLimit.Array.data[2]
       value: 
       objectReference: {fileID: 1615559399}
+    - target: {fileID: 3676593113451679009, guid: 65f0cc6716e601f42bd2c6a207f4deae,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8103559936389360098, guid: 65f0cc6716e601f42bd2c6a207f4deae,
         type: 3}
       propertyPath: m_RootOrder
@@ -1222,6 +1227,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8278679574261044877, guid: 65f0cc6716e601f42bd2c6a207f4deae,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 65f0cc6716e601f42bd2c6a207f4deae, type: 3}
