@@ -46,6 +46,7 @@ public class PlayerController : MonoBehaviour {
         if (isLost) {
             Debug.Log("GAME OVER");
             GameManager.instance.ChangeState(State.LOOSE);
+            SetGravity(GravityDirection.Down);
         }
     }
 
