@@ -11,13 +11,22 @@ public class DoubleJump : ICapacity {
         if (jumps <= 0)
             return;
 
-        if(jumps == 2)
+        if (jumps == 2)
+        {
             AudioManager.instance.Play("Jump");
+            PlayerController.animator.Play("Jump");
+        }
         else
         {
             AudioManager.instance.Play("DoubleJump");
+            PlayerController.animator.Play("DoubleJump");
         }
         player.Jump();
         jumps--;
+    }
+
+    public int GetJumpLeft()
+    {
+        return jumps;
     }
 }
