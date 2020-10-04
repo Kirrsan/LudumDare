@@ -50,6 +50,11 @@ public class LevelManager : MonoBehaviour {
         RenderSettings.skybox = worlds[currentWorld].skybox;
         RenderSettings.fogColor = worlds[currentWorld].color;
     }
+
+    public int GetWorldArrayLength()
+    {
+        return worlds.Length;
+    }
 }
 
 [System.Serializable]

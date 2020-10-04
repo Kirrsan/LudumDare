@@ -37,17 +37,22 @@ public class PlayerController : MonoBehaviour
     private GravityDirection gravityDirection = GravityDirection.Down;
 
     [SerializeField] private ParticleSystem dustCloud;
+    [SerializeField] private GameObject[] reactors;
 
     private bool _gameStartDelay;
+    
+    private int _numberOfWorlds;
 
     private void Awake() {
         rigidbody = GetComponent<Rigidbody>();
         playerMovement = GetComponent<PlayerMovement>();
         levelManager = FindObjectOfType<LevelManager>();
         animator = GetComponent<Animator>();
+        _numberOfWorlds = levelManager.GetWorldArrayLength();
     }
 
     private void Start() {
+        reactors[levelManager.CurrentWorld].SetActive(true);
         StartCoroutine(WaitAndStart());
         StartCoroutine(WaitAndTakeAStep());
     }
@@ -125,6 +130,17 @@ public class PlayerController : MonoBehaviour
                 rigidbody.velocity = new Vector3(rigidbody.velocity.x, 0, rigidbody.velocity.z);
                 break;
         }
+    }
+    
+    public void SetActionsAccordingToWorld()
+    {
+        //activate right reactor
+        reactors[levelManager.CurrentWorld].SetActive(true);
+        //deactivate last reactor
+        if(levelManager.CurrentWorld != 0)
+            reactors[levelManager.CurrentWorld - 1].SetActive(false);
+        else
+            reactors[_numberOfWorlds - 1].SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other) {
