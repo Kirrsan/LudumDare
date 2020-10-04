@@ -120,6 +120,20 @@ MonoBehaviour:
     priority: 150
     loop: 0
     source: {fileID: 0}
+  - clipName: Music
+    clip:
+    - {fileID: 8300000, guid: bdd152f0fd81cb946ab02dd7186af384, type: 3}
+    volume: 1
+    priority: 256
+    loop: 1
+    source: {fileID: 0}
+  - clipName: Win
+    clip:
+    - {fileID: 8300000, guid: 06b5a06cb4d333948a30b2e8b9de268d, type: 3}
+    volume: 1
+    priority: 0
+    loop: 0
+    source: {fileID: 0}
 --- !u!1 &5608119999857927708
 GameObject:
   m_ObjectHideFlags: 0

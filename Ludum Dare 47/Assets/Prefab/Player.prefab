@@ -5177,10 +5177,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speedPallier:
   - 15
-  - 25
   - 30
-  - 35
-  - 40
+  - 60
+  - 120
+  - 240
   _rateOvertime:
   - 50
   - 75
@@ -5193,6 +5193,12 @@ MonoBehaviour:
   - 100
   - 125
   - 150
+  _musicPallier:
+  - 1
+  - 1.2
+  - 1.4
+  - 1.6
+  - 1.8
   _system: {fileID: 4938616713201052797}
 --- !u!65 &4071178171498328799
 BoxCollider:
