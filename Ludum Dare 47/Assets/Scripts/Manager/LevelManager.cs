@@ -1,20 +1,24 @@
 ﻿using UnityEngine;
+using System.Collections;
+using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour {
+
     public static LevelManager instance;
 
-    [SerializeField] private GameObject[] worlds;
+    [SerializeField] private Worlds[] worlds;
 
-    [SerializeField] int currentWorld = 0;
+    private int currentWorld;
 
     public int CurrentWorld => currentWorld;
 
-    private void Awake() {
-        if (instance != null && instance != this) {
-            Destroy(gameObject);
+    private void Awake()
+    {
+        if(instance != null && instance != this)
+        {
+            Destroy(this.gameObject);
             return;
         }
-
         instance = this;
     }
 
@@ -24,8 +28,9 @@ public class LevelManager : MonoBehaviour {
 
     private void UpdateWorlds() {
         for (var i = 0; i < worlds.Length; i++) {
-            worlds[i].SetActive(i == currentWorld);
+            worlds[i].gameObjects.SetActive(i == currentWorld);
         }
+        SwitchSkybox();
     }
 
     public void ActivateNextWorld() {
@@ -34,8 +39,23 @@ public class LevelManager : MonoBehaviour {
         UpdateWorlds();
     }
 
-    public void Reset() {
+    public void Reset()
+    {
         currentWorld = 0;
         UpdateWorlds();
     }
+
+    private void SwitchSkybox()
+    {
+        RenderSettings.skybox = worlds[currentWorld].skybox;
+        RenderSettings.fogColor = worlds[currentWorld].color;
+    }
+}
+
+[System.Serializable]
+public struct Worlds
+{
+    public Material skybox;
+    public Color color;
+    public GameObject gameObjects;
 }
