@@ -15,6 +15,8 @@ public class Portal : MonoBehaviour {
             AudioManager.instance.Play("Portal");
             playerMovement.speedMultiplier = addSpeed;
             lvlManager.ActivateNextWorld();
+            if(lvlManager.CurrentWorld == 0)
+                other.GetComponent<PlayerController>().SetGravity(GravityDirection.Down);
         }
     }
 }
