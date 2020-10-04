@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    private bool CheckLoseCondition() => !killLimit.Contains(transform.position);
+    private bool CheckLoseCondition() => !killLimit.Contains(transform.position) && transform.position.y < killLimit.max.y;
 
     #endregion
 
