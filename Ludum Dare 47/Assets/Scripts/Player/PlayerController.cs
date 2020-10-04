@@ -141,6 +141,14 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            playerMovement.rigidbody.velocity = new Vector3 (rigidbody.velocity.x, rigidbody.velocity.y, 0f);
+        }
+    }
+
     private IEnumerator WaitBeforeStep() {
         yield return new WaitForSeconds(0.2f);
         StartCoroutine(WaitAndTakeAStep());

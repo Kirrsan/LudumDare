@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour {
     public float Speed => speedMultiplier * baseSpeed;
 
     private PlayerController controller;
-    private new Rigidbody rigidbody;
+    public new Rigidbody rigidbody;
 
     private Vector3 lastPosition;
 
