@@ -76,6 +76,50 @@ MonoBehaviour:
     priority: 0
     loop: 0
     source: {fileID: 0}
+  - clipName: Jump
+    clip:
+    - {fileID: 8300000, guid: c748188a8f850d04e8a721db0336cdef, type: 3}
+    - {fileID: 8300000, guid: a3e4db526d819944bbd78b3f2a7ac0fc, type: 3}
+    - {fileID: 8300000, guid: 2112fa48dc689c24fbe027ed9c70efb5, type: 3}
+    volume: 1
+    priority: 0
+    loop: 0
+    source: {fileID: 0}
+  - clipName: Dash
+    clip:
+    - {fileID: 8300000, guid: 490c17fbc3b024f45b37981beba04430, type: 3}
+    volume: 1
+    priority: 0
+    loop: 0
+    source: {fileID: 0}
+  - clipName: DoubleJump
+    clip:
+    - {fileID: 8300000, guid: 24654a81c089a8944ae9cb59c4ad7623, type: 3}
+    volume: 1
+    priority: 0
+    loop: 0
+    source: {fileID: 0}
+  - clipName: StickToWall
+    clip:
+    - {fileID: 8300000, guid: 1610ebbbee5ca1b49b315dd8294bfe91, type: 3}
+    volume: 1
+    priority: 0
+    loop: 0
+    source: {fileID: 0}
+  - clipName: Step
+    clip:
+    - {fileID: 8300000, guid: 7ea502a1c416964489f501c0d7544125, type: 3}
+    - {fileID: 8300000, guid: 3d5438953bed47f4aa532240142a683e, type: 3}
+    - {fileID: 8300000, guid: 857ba71f163ce664e95bd62beed56350, type: 3}
+    - {fileID: 8300000, guid: a85f2a79ef508a540bcea7999826e3fa, type: 3}
+    - {fileID: 8300000, guid: e523fe893019ffa40960a7fe4a64978c, type: 3}
+    - {fileID: 8300000, guid: cccda180acf233946833053b1934e116, type: 3}
+    - {fileID: 8300000, guid: f2c8109bbcb861142afe0822d285a8fd, type: 3}
+    - {fileID: 8300000, guid: ab868cd0f314e6d43b6810832e5eba81, type: 3}
+    volume: 1
+    priority: 150
+    loop: 0
+    source: {fileID: 0}
 --- !u!1 &5608119999857927708
 GameObject:
   m_ObjectHideFlags: 0

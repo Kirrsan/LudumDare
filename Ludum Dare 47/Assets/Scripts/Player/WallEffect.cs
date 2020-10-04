@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class WallEffect : MonoBehaviour
 {
@@ -21,8 +22,7 @@ public class WallEffect : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Wall"))
         {
-            AudioManager.instance.Play("Grind");
-            _particles.SetActive(true);
+            DoWallEffects();
         }
     }
 
@@ -30,9 +30,27 @@ public class WallEffect : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Wall"))
         {
-            AudioManager.instance.Stop("Grind");
-            _particles.SetActive(false);
+            StopWallEffects();
         }
+    }
+
+    private void DoWallEffects()
+    {
+        AudioManager.instance.Play("StickToWall");
+        StartCoroutine(WaitAndGrind());
+        _particles.SetActive(true);
+    }
+
+    private void StopWallEffects()
+    {
+        AudioManager.instance.Stop("Grind");
+        _particles.SetActive(false);
+    }
+
+    private IEnumerator WaitAndGrind()
+    {
+        yield return new WaitForSeconds(AudioManager.instance.GetClipLength("StickToWall"));
+        AudioManager.instance.Play("Grind");
     }
 
 }

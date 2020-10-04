@@ -6,7 +6,10 @@ public class WallRun : ICapacity {
     public void UseCapacity(PlayerController player) {
         Debug.Log("UseCapacity");
         if (player.IsGrounded)
+        {
+            AudioManager.instance.Play("Jump");
             player.Jump();
+        }
         else
             AttachToWall(player);
     }
@@ -17,6 +20,7 @@ public class WallRun : ICapacity {
 
         if (leftRaycast) {
             Debug.Log("Found left wall");
+            AudioManager.instance.Play("Dash");
             player.SetGravity(GravityDirection.Left);
             return;
         }
@@ -25,6 +29,7 @@ public class WallRun : ICapacity {
 
         if (rightRaycast) {
             Debug.Log("Found right wall");
+            AudioManager.instance.Play("Dash");
             player.SetGravity(GravityDirection.Right);
         }
     }
