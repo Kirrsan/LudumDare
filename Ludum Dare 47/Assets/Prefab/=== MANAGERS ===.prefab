@@ -43,7 +43,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c64424dce998294fbceaa735c3aee7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundEffects: []
+  soundEffects:
+  - clipName: Landing
+    clip:
+    - {fileID: 8300000, guid: e414b4e62aebf754abadea682e96df8f, type: 3}
+    - {fileID: 8300000, guid: 1df73e79885eb5f488fc07878c787d04, type: 3}
+    - {fileID: 8300000, guid: 42946a23050006942827f065f7c2f75e, type: 3}
+    volume: 1
+    priority: 0
+    loop: 0
+    source: {fileID: 0}
+  - clipName: Grind
+    clip:
+    - {fileID: 8300000, guid: f0c13d99008d72b4b8197952e0c9411a, type: 3}
+    volume: 1
+    priority: 0
+    loop: 1
+    source: {fileID: 0}
+  - clipName: Portal
+    clip:
+    - {fileID: 8300000, guid: 6e6d871b3c2599547bd5aba909a584ae, type: 3}
+    - {fileID: 8300000, guid: ce131b4c6bc38ef4b81b5f3521d67aff, type: 3}
+    - {fileID: 8300000, guid: 6a7f84a8a14bdaa49913194d2d89b49d, type: 3}
+    volume: 1
+    priority: 0
+    loop: 0
+    source: {fileID: 0}
+  - clipName: Rewind
+    clip:
+    - {fileID: 8300000, guid: 87eefd0c8a2f9d04c886cbbb4c8a9117, type: 3}
+    volume: 0.3
+    priority: 0
+    loop: 0
+    source: {fileID: 0}
 --- !u!1 &5608119999857927708
 GameObject:
   m_ObjectHideFlags: 0

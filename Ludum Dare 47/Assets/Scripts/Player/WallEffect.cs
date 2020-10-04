@@ -21,6 +21,7 @@ public class WallEffect : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Wall"))
         {
+            AudioManager.instance.Play("Grind");
             _particles.SetActive(true);
         }
     }
@@ -29,6 +30,7 @@ public class WallEffect : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Wall"))
         {
+            AudioManager.instance.Stop("Grind");
             _particles.SetActive(false);
         }
     }
