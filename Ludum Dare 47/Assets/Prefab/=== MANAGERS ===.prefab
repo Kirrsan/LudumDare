@@ -164,4 +164,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92f142c064c229942924568d8a1bea4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  worlds: []
+  worlds:
+  - skybox: {fileID: 2100000, guid: cc421da483ed06c49933077a621bff25, type: 2}
+    color: {r: 0.7830189, g: 0.21052866, b: 0.5883721, a: 1}
+    gameObjects: {fileID: 0}
+  - skybox: {fileID: 2100000, guid: 2bd8959f5fbd3644aa33af1a155fc147, type: 2}
+    color: {r: 0.9150943, g: 0.5551265, b: 0.43596473, a: 1}
+    gameObjects: {fileID: 0}
