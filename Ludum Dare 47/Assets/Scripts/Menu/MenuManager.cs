@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class MenuManager : MonoBehaviour
 {
@@ -15,12 +16,28 @@ public class MenuManager : MonoBehaviour
     private Animator _creditsButtonAnimator;
     [SerializeField] private Button _backButton;
 
+    [SerializeField] private EventSystem _eventSystem;
+
+    private GameObject _lastSelectedObject;
+
     // Start is called before the first frame update
     private void Start()
     {
         _playButtonAnimator = _playButton.GetComponent<Animator>();
         _creditsButtonAnimator = _creditsButton.GetComponent<Animator>();
         GoToBasePanel();
+    }
+
+    private void Update()
+    {
+        if (EventSystem.current.currentSelectedGameObject == null)
+        {
+            _eventSystem.SetSelectedGameObject(_lastSelectedObject);
+        }
+        else
+        {
+            _lastSelectedObject = _eventSystem.currentSelectedGameObject;
+        }
     }
 
     public void Play()
@@ -33,12 +50,10 @@ public class MenuManager : MonoBehaviour
         _basePanel.SetActive(true);
         _optionsPanel.SetActive(false);
         _playButton.Select();
-        _playButtonAnimator.SetTrigger("Selected");
     }
 
     public void Options()
     {
-        _creditsButtonAnimator.SetTrigger("Normal");
         _basePanel.SetActive(false);
         _optionsPanel.SetActive(true);
         _backButton.Select();
