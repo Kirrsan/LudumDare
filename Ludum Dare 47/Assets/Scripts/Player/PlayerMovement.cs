@@ -2,12 +2,10 @@
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour {
-    /*[SerializeField, Min(0)] private*/
-    public float baseSpeed = 5.0f;
+    [SerializeField, Min(0)] private float baseSpeed = 15f;
+    public float speedMultiplier = 1f;
 
-    public float Speed => baseSpeed;
-
-    public float currentSpeed = 0;
+    public float Speed => speedMultiplier * baseSpeed;
 
     private new Rigidbody rigidbody;
 
@@ -15,12 +13,7 @@ public class PlayerMovement : MonoBehaviour {
         rigidbody = GetComponent<Rigidbody>();
     }
 
-    private void Start()
-    {
-        currentSpeed = baseSpeed;
-    }
-
     private void Update() {
-        rigidbody.velocity = new Vector3(rigidbody.velocity.x, rigidbody.velocity.y, currentSpeed);
+        rigidbody.velocity = new Vector3(rigidbody.velocity.x, rigidbody.velocity.y, Speed);
     }
 }

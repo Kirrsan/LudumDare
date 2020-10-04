@@ -3,21 +3,19 @@
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour {
     [SerializeField, Min(0)] private float jumpForce = 20f;
+    [SerializeField] private Vector3 respawnPosition = new Vector3(0, 50, -15);
     [SerializeField] private LayerMask ground;
-    [SerializeField] private Bounds groundCheckBounds;
     [SerializeField] private Transform[] killLimit;
     [SerializeField] private Vector3 groundCheckCenter;
     [SerializeField] private float groundCheckRadius;
 
-    private ICapacity[] capacities = {new DoubleJump(), new WallRun()};
+    private readonly ICapacity[] capacities = {new DoubleJump(), new WallRun()};
 
     private LevelManager levelManager;
 
     private new Rigidbody rigidbody;
-    public Rigidbody Rigidbody => rigidbody;
 
     private PlayerMovement playerMovement;
-    public PlayerMovement PlayerMovement => playerMovement;
 
     [SerializeField] private bool isGrounded;
     public bool IsGrounded => isGrounded;
@@ -37,12 +35,26 @@ public class PlayerController : MonoBehaviour {
     private void Update() {
         if (Input.GetKeyDown(KeyCode.Space))
             capacities[levelManager.CurrentWorld].UseCapacity(this);
-        GameOver(CheckLoseCondition());
+        if (CheckLoseCondition()) {
+            transform.position = respawnPosition;
+            levelManager.Reset();
+            Reset();
+        }
+    }
+
+    private void FixedUpdate() {
+        isGrounded = GroundCheck();
+        capacities[levelManager.CurrentWorld].Update(this);
+    }
+
+    private void Reset() {
+        playerMovement.speedMultiplier = 1f;
+        SetGravity(GravityDirection.Down);
     }
 
     #region WinLoseCondition
 
-    void GameOver(bool isLost) {
+    private void GameOver(bool isLost) {
         if (isLost) {
             Debug.Log("GAME OVER");
             GameManager.instance.ChangeState(State.LOOSE);
@@ -50,19 +62,12 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    bool CheckLoseCondition() {
-        if (transform.position.y < killLimit[0].position.y || transform.position.x < killLimit[1].position.x || transform.position.x > killLimit[2].position.x)
-            return true;
-        return false;
-    }
+    private bool CheckLoseCondition() =>
+        transform.position.y < killLimit[0].position.y
+        || transform.position.x < killLimit[1].position.x
+        || transform.position.x > killLimit[2].position.x;
 
     #endregion
-
-
-    private void FixedUpdate() {
-        isGrounded = GroundCheck();
-        capacities[levelManager.CurrentWorld].Update(this);
-    }
 
     private bool GroundCheck() =>
         rigidbody.velocity.y <= 0.01f
@@ -106,15 +111,14 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    void OnTriggerEnter(Collider other) {
+    private void OnTriggerEnter(Collider other) {
         if (other.CompareTag("KillZone"))
             GameManager.instance.ChangeState(State.LOOSE);
 
         else if (other.CompareTag("WinZone"))
             GameManager.instance.ChangeState(State.WIN);
 
-        else if (other.CompareTag("Sol"))
-        {
+        else if (other.CompareTag("Sol")) {
             dustCloud.Play();
         }
     }

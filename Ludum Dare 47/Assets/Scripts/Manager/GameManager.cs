@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.XR.WSA.Persistence;
+﻿using UnityEngine;
 
 public enum State { PAUSE, INGAME, WIN, LOOSE }
 public class GameManager : MonoBehaviour
@@ -24,13 +20,13 @@ public class GameManager : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         ChangeState(State.INGAME);
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (Input.GetKeyUp(KeyCode.Escape) && state != State.PAUSE)
         {

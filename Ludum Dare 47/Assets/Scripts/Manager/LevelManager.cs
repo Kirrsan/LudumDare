@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 
 public class LevelManager : MonoBehaviour {
-
     public static LevelManager instance;
 
     [SerializeField] private GameObject[] worlds;
@@ -10,13 +9,12 @@ public class LevelManager : MonoBehaviour {
 
     public int CurrentWorld => currentWorld;
 
-    private void Awake()
-    {
-        if(instance != null && instance != this)
-        {
-            Destroy(this.gameObject);
+    private void Awake() {
+        if (instance != null && instance != this) {
+            Destroy(gameObject);
             return;
         }
+
         instance = this;
     }
 
@@ -33,6 +31,11 @@ public class LevelManager : MonoBehaviour {
     public void ActivateNextWorld() {
         currentWorld++;
         currentWorld %= worlds.Length;
+        UpdateWorlds();
+    }
+
+    public void Reset() {
+        currentWorld = 0;
         UpdateWorlds();
     }
 }

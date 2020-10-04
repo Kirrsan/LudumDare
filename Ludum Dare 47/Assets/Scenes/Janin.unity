@@ -259,6 +259,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2306789083488749324, guid: f7fd9833c9b677d46868f7c6a599af8b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2306789083561537342, guid: f7fd9833c9b677d46868f7c6a599af8b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -10
+      objectReference: {fileID: 0}
     - target: {fileID: 2306789084125424340, guid: f7fd9833c9b677d46868f7c6a599af8b,
         type: 3}
       propertyPath: m_Name
@@ -318,6 +328,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2306789084930407875, guid: f7fd9833c9b677d46868f7c6a599af8b,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7fd9833c9b677d46868f7c6a599af8b, type: 3}
@@ -490,6 +505,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee2db8a04a69c894abfda0d7e9cf6d4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &799070564
 GameObject:
   m_ObjectHideFlags: 0
@@ -648,6 +669,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee2db8a04a69c894abfda0d7e9cf6d4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &1201568616
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -838,6 +865,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee2db8a04a69c894abfda0d7e9cf6d4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &1462854771 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8103559936389360096, guid: 65f0cc6716e601f42bd2c6a207f4deae,
@@ -956,6 +989,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee2db8a04a69c894abfda0d7e9cf6d4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &1608016942
 PrefabInstance:
   m_ObjectHideFlags: 0

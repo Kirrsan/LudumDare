@@ -1,36 +1,19 @@
 ﻿using UnityEngine;
 
-public class Portal : MonoBehaviour
-{
-
-    BoxCollider boxCollider;
+public class Portal : MonoBehaviour {
+    private BoxCollider boxCollider;
     public PlayerMovement playerMovement;
     public LevelManager lvlManager;
     public float addSpeed;
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    private void Start() {
         boxCollider = GetComponent<BoxCollider>();
     }
 
-    // Update is called once per frame
-    /*private void on
-    {
-        if (collision.gameObject.name == "Player")
-        {
-            Debug.Log("yes");
+    private void OnTriggerEnter(Collider other) {
+        if (other.gameObject.CompareTag("Player")) {
+            playerMovement.speedMultiplier = addSpeed;
             lvlManager.ActivateNextWorld();
-        }
-    }*/
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            playerMovement.currentSpeed *= addSpeed;
-            lvlManager.ActivateNextWorld();
-
         }
     }
 }

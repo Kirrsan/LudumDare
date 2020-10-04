@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class DisplayMetersLeft : MonoBehaviour
@@ -10,7 +8,7 @@ public class DisplayMetersLeft : MonoBehaviour
 
     [SerializeField]private Text _metersLeft;
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         _metersLeft.text = CalculateDistance().ToString() + " m";
     }

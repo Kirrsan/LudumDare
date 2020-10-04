@@ -15,6 +15,7 @@ public class BlockSpawnAnimation : MonoBehaviour {
     private void Awake() {
         if (!player)
             player = FindObjectOfType<PlayerMovement>();
+
         targetPosition = transform.position;
         startingAngle = transform.eulerAngles;
         positionOffset = new Vector3(Random.Range(-10, 10), Random.Range(-5, -15), Random.Range(0, 5));

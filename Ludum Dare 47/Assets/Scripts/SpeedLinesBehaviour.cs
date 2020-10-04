@@ -16,7 +16,7 @@ public class SpeedLinesBehaviour : MonoBehaviour {
 
     private int _currentPallier;
 
-    void Start() {
+    private void Start() {
         _playerMovement = GetComponent<PlayerMovement>();
 
         _pallierReached = new bool[_speedPallier.Length];
@@ -25,8 +25,8 @@ public class SpeedLinesBehaviour : MonoBehaviour {
         }
     }
 
-    void Update() {
-        _speed = _playerMovement.currentSpeed;
+    private void Update() {
+        _speed = _playerMovement.Speed;
         if (_currentPallier < _speedPallier.Length) {
             if (_speed >= _speedPallier[_currentPallier] && !_pallierReached[_currentPallier]) {
                 _pallierReached[_currentPallier] = true;
