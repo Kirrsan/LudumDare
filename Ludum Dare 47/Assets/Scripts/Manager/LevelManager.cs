@@ -39,6 +39,12 @@ public class LevelManager : MonoBehaviour {
         UpdateWorlds();
     }
 
+    public void Reset()
+    {
+        currentWorld = 0;
+        UpdateWorlds();
+    }
+
     private void SwitchSkybox()
     {
         RenderSettings.skybox = worlds[currentWorld].skybox;
