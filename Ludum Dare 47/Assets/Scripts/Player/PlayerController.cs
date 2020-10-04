@@ -4,7 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour {
     [SerializeField, Min(0)] private float jumpForce = 20f;
-    [SerializeField] private Vector3 respawnPosition = new Vector3(0, 50, -15);
+    [SerializeField] private Vector3 respawnPosition = new Vector3(0, 50, -20);
     [SerializeField] private LayerMask ground;
     [SerializeField] private Bounds killLimit;
     [SerializeField] private Vector3 groundCheckCenter;
