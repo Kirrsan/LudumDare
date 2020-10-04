@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour {
     private void Start()
     {
         StartCoroutine(WaitAndStart());
+        StartCoroutine(WaitAndTakeAStep());
     }
 
     private IEnumerator WaitAndStart()
@@ -49,6 +50,7 @@ public class PlayerController : MonoBehaviour {
     private void Update() {
         if (Input.GetKeyDown(KeyCode.Space))
             capacities[levelManager.CurrentWorld].UseCapacity(this);
+
         if (CheckLoseCondition()) {
             transform.position = respawnPosition;
             levelManager.Reset();
@@ -127,6 +129,31 @@ public class PlayerController : MonoBehaviour {
         else if (other.CompareTag("Sol") && _gameStartDelay) {
             AudioManager.instance.Play("Landing");
             dustCloud.Play();
+            StartCoroutine(WaitBeforeStep());
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Sol"))
+        {
+            AudioManager.instance.Stop("Step");
+        }
+    }
+
+    private IEnumerator WaitBeforeStep()
+    {
+        yield return new WaitForSeconds(0.2f);
+        StartCoroutine(WaitAndTakeAStep());
+    }
+
+    private IEnumerator WaitAndTakeAStep()
+    {
+        AudioManager.instance.Play("Step");
+        yield return new WaitForSeconds(AudioManager.instance.GetClipLength("Step"));
+        if (isGrounded)
+        {
+            StartCoroutine(WaitAndTakeAStep());
         }
     }
 
