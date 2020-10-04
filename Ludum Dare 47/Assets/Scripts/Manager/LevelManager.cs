@@ -57,8 +57,8 @@ public class LevelManager : MonoBehaviour {
 
     public void Reset()
     {
-        currentWorld = 0;
         ChangePortal(false, currentPortalIndex);
+        currentWorld = 0;
         currentPortalIndex = 0;
         ChangePortal(true, currentPortalIndex);
         UpdateWorlds();

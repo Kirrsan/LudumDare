@@ -36,10 +36,7 @@ public class PlayerController : MonoBehaviour
 
     private GravityDirection gravityDirection = GravityDirection.Down;
 
-    [SerializeField] private ParticleSystem dustCloud;
     [SerializeField] private GameObject[] reactors;
-
-    private bool _gameStartDelay;
     
     private int _numberOfWorlds;
 
@@ -53,13 +50,6 @@ public class PlayerController : MonoBehaviour
 
     private void Start() {
         reactors[levelManager.CurrentWorld].SetActive(true);
-        StartCoroutine(WaitAndStart());
-        StartCoroutine(WaitAndTakeAStep());
-    }
-
-    private IEnumerator WaitAndStart() {
-        yield return new WaitForSeconds(0.3f);
-        _gameStartDelay = true;
     }
 
     private void Update() {
@@ -150,16 +140,6 @@ public class PlayerController : MonoBehaviour
         else if (other.CompareTag("WinZone")) {
             AudioManager.instance.Play("Win");
             GameManager.instance.ChangeState(State.WIN);
-        } else if (other.CompareTag("Sol") && _gameStartDelay) {
-            AudioManager.instance.Play("Landing");
-            dustCloud.Play();
-            StartCoroutine(WaitBeforeStep());
-        }
-    }
-
-    private void OnTriggerExit(Collider other) {
-        if (other.CompareTag("Sol")) {
-            AudioManager.instance.Stop("Step");
         }
     }
 
@@ -167,20 +147,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Wall"))
         {
-            playerMovement.rigidbody.velocity = new Vector3 (rigidbody.velocity.x, rigidbody.velocity.y, 0f);
-        }
-    }
-
-    private IEnumerator WaitBeforeStep() {
-        yield return new WaitForSeconds(0.2f);
-        StartCoroutine(WaitAndTakeAStep());
-    }
-
-    private IEnumerator WaitAndTakeAStep() {
-        AudioManager.instance.Play("Step");
-        yield return new WaitForSeconds(AudioManager.instance.GetClipLength("Step"));
-        if (isGrounded) {
-            StartCoroutine(WaitAndTakeAStep());
+            playerMovement.rigidbody.velocity = new Vector3(rigidbody.velocity.x, rigidbody.velocity.y, 0f);
         }
     }
 

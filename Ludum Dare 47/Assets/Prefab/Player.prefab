@@ -1,5 +1,63 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &618987918964984065
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3646359107530551470}
+  - component: {fileID: 1134016194379755774}
+  - component: {fileID: 7516860833015767453}
+  m_Layer: 0
+  m_Name: Ground
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3646359107530551470
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 618987918964984065}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8103559936389360098}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1134016194379755774
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 618987918964984065}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.02, z: 1}
+  m_Center: {x: 0, y: -1.004, z: 0}
+--- !u!114 &7516860833015767453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 618987918964984065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 951a6a421e7c32944a3091b4f5102178, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dustCloud: {fileID: 2661837140042427254}
 --- !u!1 &2023962587697746126
 GameObject:
   m_ObjectHideFlags: 0
@@ -4905,7 +4963,7 @@ Transform:
   m_Children:
   - {fileID: 9016193876540829392}
   m_Father: {fileID: 8103559936389360098}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
 --- !u!65 &5745229235689141810
 BoxCollider:
@@ -4949,7 +5007,6 @@ GameObject:
   - component: {fileID: 8103559936389360096}
   - component: {fileID: 1875637035892826418}
   - component: {fileID: 2059947405540949763}
-  - component: {fileID: 4071178171498328799}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -4969,6 +5026,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 94419204030356623}
+  - {fileID: 3646359107530551470}
   - {fileID: 4182372387326909678}
   - {fileID: 4197940037138904765}
   - {fileID: 552301076786773709}
@@ -5100,7 +5158,6 @@ MonoBehaviour:
   - center: {x: -0.27, y: -0.5, z: 0}
     radius: 0.25
   isGrounded: 0
-  dustCloud: {fileID: 2661837140042427254}
   reactors:
   - {fileID: 2908313452297675095}
   - {fileID: 552301076786773708}
@@ -5141,19 +5198,6 @@ MonoBehaviour:
   - 1.6
   - 1.8
   _system: {fileID: 0}
---- !u!65 &4071178171498328799
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8103559936389360110}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 0.02, z: 1}
-  m_Center: {x: 0, y: -1.004, z: 0}
 --- !u!1 &8245304128572531971
 GameObject:
   m_ObjectHideFlags: 0
@@ -5185,7 +5229,7 @@ Transform:
   m_Children:
   - {fileID: 6873726231564950180}
   m_Father: {fileID: 8103559936389360098}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &4996831176815899246
 BoxCollider:
@@ -14766,7 +14810,7 @@ PrefabInstance:
     - target: {fileID: 798000328911845420, guid: 30cf97662958fd94d9dfd302cee8528d,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 798000328911845420, guid: 30cf97662958fd94d9dfd302cee8528d,
         type: 3}
@@ -14862,7 +14906,7 @@ PrefabInstance:
     - target: {fileID: 645643727748802537, guid: 45ca205911a4a424ea6fcc8c387411c3,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 645643727748802537, guid: 45ca205911a4a424ea6fcc8c387411c3,
         type: 3}
