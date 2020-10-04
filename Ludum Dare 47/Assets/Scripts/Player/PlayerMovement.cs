@@ -4,6 +4,7 @@
 public class PlayerMovement : MonoBehaviour {
     [SerializeField, Min(0)] private float baseSpeed = 15f;
     public float speedMultiplier = 1f;
+    public bool isBugged = false;
 
     public float Speed => speedMultiplier * baseSpeed;
 
@@ -14,6 +15,13 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void Update() {
-        rigidbody.velocity = new Vector3(rigidbody.velocity.x, rigidbody.velocity.y, Speed);
+        rigidbody.velocity = new Vector3(rigidbody.velocity.x, rigidbody.velocity.y, isBugged ? 0f : Speed);
+        
+        
+    }
+
+    public void speedZero()
+    {
+        speedMultiplier = 0f;
     }
 }

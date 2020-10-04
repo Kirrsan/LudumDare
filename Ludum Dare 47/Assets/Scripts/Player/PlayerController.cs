@@ -65,6 +65,7 @@ public class PlayerController : MonoBehaviour {
 
     private void Reset() {
         AudioManager.instance.Play("Rewind");
+        playerMovement.isBugged = false;
         playerMovement.speedMultiplier = 1f;
         SetGravity(GravityDirection.Down);
     }
