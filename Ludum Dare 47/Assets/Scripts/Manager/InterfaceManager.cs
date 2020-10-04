@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class InterfaceManager : MonoBehaviour
 {
@@ -8,6 +10,11 @@ public class InterfaceManager : MonoBehaviour
     [SerializeField] private GameObject _pausePanel;
     [SerializeField] private GameObject _winPanel;
     [SerializeField] private GameObject _loosePanel;
+
+    [SerializeField] private Button _playButton;
+    [SerializeField] private EventSystem _eventSystem;
+    private GameObject _lastSelectedObject;
+
 
     // Start is called before the first frame update
     private void Start()
@@ -36,7 +43,14 @@ public class InterfaceManager : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        
+        if (EventSystem.current.currentSelectedGameObject == null)
+        {
+            _eventSystem.SetSelectedGameObject(_lastSelectedObject);
+        }
+        else
+        {
+            _lastSelectedObject = _eventSystem.currentSelectedGameObject;
+        }
     }
 
     private void GoInpause()
@@ -44,6 +58,7 @@ public class InterfaceManager : MonoBehaviour
         Time.timeScale = 0;
         _gamePanel.SetActive(false);
         _pausePanel.SetActive(true);
+        _playButton.Select();
     }
 
     private void GoToGame()
