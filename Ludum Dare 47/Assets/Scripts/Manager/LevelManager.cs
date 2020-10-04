@@ -38,9 +38,9 @@ public class LevelManager : MonoBehaviour {
 
     public void ActivateNextWorld() {
         currentWorld++;
+        currentWorld %= worlds.Length;
         ChangePortal(false, currentPortalIndex);
         currentPortalIndex++;
-        currentWorld %= worlds.Length;
         UpdateWorlds();
         ChangePortal(true, currentPortalIndex);
     }
