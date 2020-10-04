@@ -125,9 +125,13 @@ public class PlayerController : MonoBehaviour {
             GameManager.instance.ChangeState(State.LOSE);
 
         else if (other.CompareTag("WinZone"))
+        {
+            AudioManager.instance.Play("Win");
             GameManager.instance.ChangeState(State.WIN);
+        }
 
-        else if (other.CompareTag("Sol") && _gameStartDelay) {
+        else if (other.CompareTag("Sol") && _gameStartDelay)
+        {
             AudioManager.instance.Play("Landing");
             dustCloud.Play();
             StartCoroutine(WaitBeforeStep());
