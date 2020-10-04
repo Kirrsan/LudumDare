@@ -7,6 +7,7 @@ public class ChangeAnim : MonoBehaviour
     private Animation _animation;
     private Animator _animator;
     private Vector3 startPosition;
+    [SerializeField] private string _animName;
 
     private void Start()
     {
@@ -18,7 +19,7 @@ public class ChangeAnim : MonoBehaviour
 
     public void ChangeAnimation()
     {
-        _animation.Play("A_TextIdle");
+        _animation.Play(_animName);
     }
     public void Deactivate()
     {

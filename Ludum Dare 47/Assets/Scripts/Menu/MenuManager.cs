@@ -10,6 +10,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private int _sceneToLoad = 1;
     
     [SerializeField] private Button _playButton;
+    [SerializeField] private Button _creditsButton;
     [SerializeField] private Button _backButton;
 
     [SerializeField] private EventSystem _eventSystem;
@@ -20,7 +21,11 @@ public class MenuManager : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        GoToBasePanel();
+        _optionsPanel.SetActive(false);
+        _basePanel.SetActive(true);
+        _playButton.Select();
+        _currentSelectedObject = _eventSystem.currentSelectedGameObject;
+        _lastSelectedObject = _currentSelectedObject;
     }
 
     private void Update()
@@ -46,13 +51,15 @@ public class MenuManager : MonoBehaviour
     {
         _basePanel.SetActive(true);
         _optionsPanel.SetActive(false);
-        _playButton.Select();
+        _backButton.GetComponent<ShowText>().ResetRotation();
+        _lastSelectedObject.GetComponent<Button>().Select();
     }
 
     public void Options()
     {
         _basePanel.SetActive(false);
         _optionsPanel.SetActive(true);
+        _creditsButton.GetComponent<ShowText>().ResetRotation();
         _backButton.Select();
     }
 
