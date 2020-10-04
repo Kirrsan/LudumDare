@@ -5065,7 +5065,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseSpeed: 15
-  currentSpeed: 0
+  speedMultiplier: 1
 --- !u!114 &1875637035892826418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5079,16 +5079,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpForce: 20
+  respawnPosition: {x: 0, y: 50, z: -15}
   ground:
     serializedVersion: 2
     m_Bits: 256
-  groundCheckBounds:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0, y: 0, z: 0}
   killLimit:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 20, y: 15, z: 10000}
   groundCheckCenter: {x: 0, y: -0.51, z: 0}
   groundCheckRadius: 0.5
   isGrounded: 0

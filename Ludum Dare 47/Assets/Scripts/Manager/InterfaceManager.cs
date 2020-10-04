@@ -25,7 +25,7 @@ public class InterfaceManager : MonoBehaviour
             {
                 GoToWin();
             }
-            else if (GameManager.instance.state == State.LOOSE)
+            else if (GameManager.instance.state == State.LOSE)
             {
                 GoToLoose();
             }

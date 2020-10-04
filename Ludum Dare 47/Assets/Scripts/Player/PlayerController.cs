@@ -5,7 +5,7 @@ public class PlayerController : MonoBehaviour {
     [SerializeField, Min(0)] private float jumpForce = 20f;
     [SerializeField] private Vector3 respawnPosition = new Vector3(0, 50, -15);
     [SerializeField] private LayerMask ground;
-    [SerializeField] private Transform[] killLimit;
+    [SerializeField] private Bounds killLimit;
     [SerializeField] private Vector3 groundCheckCenter;
     [SerializeField] private float groundCheckRadius;
 
@@ -57,27 +57,18 @@ public class PlayerController : MonoBehaviour {
     private void GameOver(bool isLost) {
         if (isLost) {
             Debug.Log("GAME OVER");
-            GameManager.instance.ChangeState(State.LOOSE);
+            GameManager.instance.ChangeState(State.LOSE);
             SetGravity(GravityDirection.Down);
         }
     }
 
-    private bool CheckLoseCondition() =>
-        transform.position.y < killLimit[0].position.y
-        || transform.position.x < killLimit[1].position.x
-        || transform.position.x > killLimit[2].position.x;
+    private bool CheckLoseCondition() => !killLimit.Contains(transform.position);
 
     #endregion
 
     private bool GroundCheck() =>
         rigidbody.velocity.y <= 0.01f
         && Physics.CheckSphere(transform.position + groundCheckCenter, groundCheckRadius, ground);
-
-    private void OnDrawGizmos() {
-        Gizmos.DrawWireSphere(transform.position + groundCheckCenter, groundCheckRadius);
-        Gizmos.DrawRay(transform.position, 5 * (transform.forward - transform.right));
-        Gizmos.DrawRay(transform.position, 5 * (transform.forward + transform.right));
-    }
 
     public void Jump() {
         switch (gravityDirection) {
@@ -113,7 +104,7 @@ public class PlayerController : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other) {
         if (other.CompareTag("KillZone"))
-            GameManager.instance.ChangeState(State.LOOSE);
+            GameManager.instance.ChangeState(State.LOSE);
 
         else if (other.CompareTag("WinZone"))
             GameManager.instance.ChangeState(State.WIN);
@@ -121,6 +112,15 @@ public class PlayerController : MonoBehaviour {
         else if (other.CompareTag("Sol")) {
             dustCloud.Play();
         }
+    }
+
+    private void OnDrawGizmos() {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(killLimit.center, killLimit.extents);
+        Gizmos.color = Color.white;
+        Gizmos.DrawWireSphere(transform.position + groundCheckCenter, groundCheckRadius);
+        Gizmos.DrawRay(transform.position, 5 * (transform.forward - transform.right));
+        Gizmos.DrawRay(transform.position, 5 * (transform.forward + transform.right));
     }
 }
 
