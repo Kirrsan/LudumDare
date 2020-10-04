@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 442976208154916901}
   - component: {fileID: 442976208154916902}
   - component: {fileID: 442976208154916903}
+  - component: {fileID: 2722852807454156499}
   m_Layer: 0
   m_Name: Portal
   m_TagString: Untagged
@@ -124,3 +125,15 @@ MonoBehaviour:
   playerMovement: {fileID: 0}
   lvlManager: {fileID: 0}
   addSpeed: 2
+--- !u!114 &2722852807454156499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 442976208154916904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee2db8a04a69c894abfda0d7e9cf6d4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
