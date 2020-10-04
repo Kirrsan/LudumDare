@@ -13,15 +13,24 @@ public class ShowText : MonoBehaviour
     {
         if (!_hasShownText)
         {
-            _hasShownText = true;
             _text.SetActive(false);
             _text.SetActive(true);
+            _hasShownText = true;
         }
     }
     public void MakeTextDisappear()
     {
-        _hasShownText = false;
-        _text.GetComponent<Animation>().Play("A_TextDisappear");
+        print("kfsl,:dw;");
+        if (_hasShownText)
+        {
+            _hasShownText = false;
+            if (_text.GetComponent<Animation>())
+                _text.GetComponent<Animation>().Play("A_TextDisappear");
+            else
+            {
+                _text.GetComponent<Animator>().SetTrigger("mustDisppear");
+            }
+        }
     }
 
 }
