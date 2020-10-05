@@ -7,6 +7,7 @@ public class LevelManager : MonoBehaviour
 
     [SerializeField] private Worlds[] worlds;
     public System.Action onReset;
+    public System.Action<int> onWorldChange;
 
     private int currentWorld;
 
