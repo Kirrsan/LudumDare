@@ -60,6 +60,7 @@ public class Dust : MonoBehaviour {
     }
 
     private void OnTriggerExit(Collider other) {
+        StopWallEffects();
         if (other.CompareTag("Sol")) {
             _isGrounded = false;
             AudioManager.instance.Stop("Step");
