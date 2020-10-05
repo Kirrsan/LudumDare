@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Dust : MonoBehaviour {
-    [SerializeField] private ParticleSystem dustCloud;
+
+    [SerializeField] private ParticleSystem _dustCloud;
+    [SerializeField] private GameObject _wallParticle;
     private bool _gameStartDelay;
     private bool _isGrounded = false;
     private GameObject _ground;
@@ -30,15 +32,18 @@ public class Dust : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other) {
         if (other.CompareTag("Sol")) {
-            print("hello");
             _isGrounded = true;
             _ground = other.gameObject;
             _groundParent = _ground.transform.parent.gameObject;
             if (_gameStartDelay) {
                 AudioManager.instance.Play("Landing");
-                dustCloud.Play();
+                _dustCloud.Play();
                 //StartCoroutine(WaitBeforeStep());
             }
+        }
+        else if (other.gameObject.CompareTag("Wall"))
+        {
+            DoWallEffects();
         }
     }
 
@@ -47,18 +52,41 @@ public class Dust : MonoBehaviour {
             _isGrounded = false;
             AudioManager.instance.Stop("Step");
         }
-    }
-
-    private IEnumerator WaitBeforeStep() {
-        yield return new WaitForSeconds(AudioManager.instance.GetClipLength("Landing"));
-        StartCoroutine(WaitAndTakeAStep());
-    }
-
-    private IEnumerator WaitAndTakeAStep() {
-        AudioManager.instance.Play("Step");
-        yield return new WaitForSeconds(0.25f);
-        if (_isGrounded) {
-            StartCoroutine(WaitAndTakeAStep());
+        else if (other.gameObject.CompareTag("Wall"))
+        {
+            StopWallEffects();
         }
     }
+
+    //private IEnumerator WaitBeforeStep() {
+    //    yield return new WaitForSeconds(AudioManager.instance.GetClipLength("Landing"));
+    //    StartCoroutine(WaitAndTakeAStep());
+    //}
+
+    //private IEnumerator WaitAndTakeAStep() {
+    //    AudioManager.instance.Play("Step");
+    //    yield return new WaitForSeconds(0.25f);
+    //    if (_isGrounded) {
+    //        StartCoroutine(WaitAndTakeAStep());
+    //    }
+    //}
+    private void DoWallEffects()
+    {
+        //AudioManager.instance.Play("StickToWall");
+        //StartCoroutine(WaitAndGrind());
+        _wallParticle.SetActive(true);
+    }
+
+    private void StopWallEffects()
+    {
+        AudioManager.instance.Stop("Grind");
+        _wallParticle.SetActive(false);
+    }
+
+    private IEnumerator WaitAndGrind()
+    {
+        yield return new WaitForSeconds(AudioManager.instance.GetClipLength("StickToWall"));
+        AudioManager.instance.Play("Grind");
+    }
+
 }
