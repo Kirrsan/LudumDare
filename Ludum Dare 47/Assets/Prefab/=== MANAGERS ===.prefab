@@ -46,9 +46,7 @@ MonoBehaviour:
   soundEffects:
   - clipName: Landing
     clip:
-    - {fileID: 8300000, guid: e414b4e62aebf754abadea682e96df8f, type: 3}
-    - {fileID: 8300000, guid: 1df73e79885eb5f488fc07878c787d04, type: 3}
-    - {fileID: 8300000, guid: 42946a23050006942827f065f7c2f75e, type: 3}
+    - {fileID: 8300000, guid: 8bc8aa30d87a6374797eebf3f3bb7a89, type: 3}
     volume: 1
     priority: 0
     loop: 0
@@ -111,7 +109,7 @@ MonoBehaviour:
     clip:
     - {fileID: 8300000, guid: edc47cfdaf90c80419c31eb3f85be2aa, type: 3}
     - {fileID: 8300000, guid: a5e467e24d4e29f4396d71b3a203a4ae, type: 3}
-    volume: 0.4
+    volume: 0.15
     priority: 250
     loop: 0
     source: {fileID: 0}
@@ -270,4 +268,3 @@ MonoBehaviour:
   - skybox: {fileID: 2100000, guid: 2bd8959f5fbd3644aa33af1a155fc147, type: 2}
     color: {r: 0.9150943, g: 0.5551265, b: 0.43596473, a: 1}
     gameObjects: {fileID: 0}
-  portals: []

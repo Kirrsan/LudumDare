@@ -12,7 +12,7 @@ public class Dust : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         StartCoroutine(WaitAndStart());
-        StartCoroutine(WaitAndTakeAStep());
+        //StartCoroutine(WaitAndTakeAStep());
     }
 
     private void Update() {
@@ -24,7 +24,7 @@ public class Dust : MonoBehaviour {
     }
 
     private IEnumerator WaitAndStart() {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.5f);
         _gameStartDelay = true;
     }
 
@@ -37,7 +37,7 @@ public class Dust : MonoBehaviour {
             if (_gameStartDelay) {
                 AudioManager.instance.Play("Landing");
                 dustCloud.Play();
-                StartCoroutine(WaitBeforeStep());
+                //StartCoroutine(WaitBeforeStep());
             }
         }
     }
@@ -50,13 +50,13 @@ public class Dust : MonoBehaviour {
     }
 
     private IEnumerator WaitBeforeStep() {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(AudioManager.instance.GetClipLength("Landing"));
         StartCoroutine(WaitAndTakeAStep());
     }
 
     private IEnumerator WaitAndTakeAStep() {
         AudioManager.instance.Play("Step");
-        yield return new WaitForSeconds(AudioManager.instance.GetClipLength("Step"));
+        yield return new WaitForSeconds(0.25f);
         if (_isGrounded) {
             StartCoroutine(WaitAndTakeAStep());
         }
