@@ -93,12 +93,12 @@ public class PlayerController : MonoBehaviour {
     }
 
     public void GoThroughPortal() {
+        rigidbody.velocity = new Vector3(0, 0, rigidbody.velocity.z);
         if (levelManager.CurrentWorld == 1)
             Jump();
 
         transform.position = new Vector3(0, transform.position.y, transform.position.z);
         transform.up = Vector3.up;
-
 
         for (var i = 0; i < levelManager.WorldCount; i++)
             if (i != levelManager.CurrentWorld)
@@ -131,7 +131,7 @@ public class PlayerController : MonoBehaviour {
 
         Gizmos.DrawWireSphere(transform.position + transform.rotation * sphereCast.center, sphereCast.radius);
 
-        Gizmos.DrawRay(transform.position, 10 * (transform.forward - transform.right));
-        Gizmos.DrawRay(transform.position, 10 * (transform.forward + transform.right));
+        Gizmos.DrawRay(transform.position, 10 * (Vector3.left + Vector3.forward));
+        Gizmos.DrawRay(transform.position, 10 * (Vector3.right + Vector3.forward));
     }
 }
