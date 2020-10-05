@@ -5,7 +5,12 @@ public class Portal : MonoBehaviour {
     public LevelManager lvlManager;
     public float addSpeed;
 
-    public GameObject[] portalVFX;
+    [SerializeField] private GameObject[] portalVFX;
+
+    public void SetIndex(int index) {
+        for (var i = 0; i < portalVFX.Length; i++)
+            portalVFX[i].SetActive(index == i);
+    }
 
     private void OnTriggerEnter(Collider other) {
         if (other.gameObject.CompareTag("Player")) {

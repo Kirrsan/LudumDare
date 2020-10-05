@@ -10,10 +10,10 @@ public class WallRun : ICapacity {
     private IState state;
 
     public WallRun() {
-        state = new Gliding(Glide, GlideDecrease);
+        state = new Gliding(true, Glide, GlideDecrease);
     }
 
-    public void Reset() => state = new Gliding(Glide, GlideDecrease);
+    public void Reset() => state = new Gliding(true, Glide, GlideDecrease);
 
     public void FixedUpdate(PlayerController player) {
         player.Rigidbody.useGravity = state is Gliding;
@@ -28,10 +28,12 @@ public class WallRun : ICapacity {
     }
 
     private struct Gliding : IState {
+        private bool wasLeftWall;
         private float glide;
         private readonly float glideDecrease;
 
-        public Gliding(float glide, float glideDecrease) {
+        public Gliding(bool wasLeftWall, float glide, float glideDecrease) {
+            this.wasLeftWall = wasLeftWall;
             this.glide = glide;
             this.glideDecrease = glideDecrease;
         }
@@ -57,6 +59,11 @@ public class WallRun : ICapacity {
         private WallRaycastResult RaycastWalls(PlayerController player) {
             var leftRaycast = Physics.Raycast(player.transform.position, new Vector3(-player.PlayerMovement.Speed, 0, player.Rigidbody.velocity.z), out var leftHit, 10, player.Ground);
             var rightRaycast = Physics.Raycast(player.transform.position, new Vector3(player.PlayerMovement.Speed, 0, player.Rigidbody.velocity.z), out var rightHit, 10, player.Ground);
+
+            if (leftRaycast && rightRaycast) {
+                leftRaycast = !wasLeftWall;
+                rightRaycast = wasLeftWall;
+            }
 
             if (leftRaycast) {
                 AudioManager.instance.Play("Dash");
@@ -151,7 +158,7 @@ public class WallRun : ICapacity {
 
             if (isLeftWall ? player.transform.position.x > 0 : player.transform.position.x < 0) {
                 player.Rigidbody.velocity = new Vector3(0, 0, player.Rigidbody.velocity.z);
-                return new Gliding(Glide, GlideDecrease);
+                return new Gliding(isLeftWall, Glide, GlideDecrease);
             }
 
             return this;
