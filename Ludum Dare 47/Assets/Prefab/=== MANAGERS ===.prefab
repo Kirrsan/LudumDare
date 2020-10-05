@@ -155,6 +155,8 @@ MonoBehaviour:
     clip:
     - {fileID: 8300000, guid: edc47cfdaf90c80419c31eb3f85be2aa, type: 3}
     - {fileID: 8300000, guid: a5e467e24d4e29f4396d71b3a203a4ae, type: 3}
+    - {fileID: 8300000, guid: 29ac4d2ac0a6e7c44adc093d6d08c760, type: 3}
+    - {fileID: 8300000, guid: 40091a1308cbfc64ab85323bee3132fc, type: 3}
     volume: 0.15
     priority: 250
     loop: 0
@@ -168,7 +170,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - clipName: Win
     clip:
-    - {fileID: 8300000, guid: 06b5a06cb4d333948a30b2e8b9de268d, type: 3}
+    - {fileID: 8300000, guid: 9eb2a1051a2083940bbf5ca35fcd202e, type: 3}
     volume: 1
     priority: 0
     loop: 0

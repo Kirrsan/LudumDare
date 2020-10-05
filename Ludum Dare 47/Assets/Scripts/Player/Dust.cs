@@ -14,7 +14,6 @@ public class Dust : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         StartCoroutine(WaitAndStart());
-        StartCoroutine(WaitAndTakeAStep());
     }
 
     private void Update() {
@@ -53,7 +52,6 @@ public class Dust : MonoBehaviour {
                 {
                     AudioManager.instance.Play("Landing");
                     _dustCloud.Play();
-                    StartCoroutine(WaitBeforeStep());
                 }
             }
         }
@@ -67,26 +65,9 @@ public class Dust : MonoBehaviour {
             StopWallEffects();
         }
     }
-
-    private IEnumerator WaitBeforeStep()
-    {
-        yield return new WaitForSeconds(0.25f);
-        StartCoroutine(WaitAndTakeAStep());
-    }
-
-    private IEnumerator WaitAndTakeAStep()
-    {
-        AudioManager.instance.Play("Step");
-        yield return new WaitForSeconds(0.25f);
-        if (_isGrounded)
-        {
-            StartCoroutine(WaitAndTakeAStep());
-        }
-    }
     private void DoWallEffects(int index)
     {
         AudioManager.instance.Play("StickToWall");
-        StartCoroutine(WaitAndGrind());
         _wallParticle[index].SetActive(true);
     }
 
@@ -97,12 +78,6 @@ public class Dust : MonoBehaviour {
         {
             particle.SetActive(false);
         }
-    }
-
-    private IEnumerator WaitAndGrind()
-    {
-        yield return new WaitForSeconds(AudioManager.instance.GetClipLength("StickToWall"));
-        AudioManager.instance.Play("Grind");
     }
 
 }
