@@ -1,20 +1,24 @@
 ﻿using UnityEngine;
 
-public class LevelManager : MonoBehaviour {
+public class LevelManager : MonoBehaviour
+{
 
     public static LevelManager instance;
 
     [SerializeField] private Worlds[] worlds;
     public System.Action onReset;
-    public System.Action<int> onWorldChange;
 
     private int currentWorld;
 
+    int sectionCount = 1;
+    PlayerController playerController;
     public int CurrentWorld => currentWorld;
     public int WorldCount => worlds.Length;
 
-    private void Awake() {
-        if (instance != null && instance != this) {
+    private void Awake()
+    {
+        if (instance != null && instance != this)
+        {
             Destroy(gameObject);
             return;
         }
@@ -22,15 +26,23 @@ public class LevelManager : MonoBehaviour {
         instance = this;
     }
 
-    private void Start() {
+    private void Start()
+    {
         UpdateWorlds();
+        playerController = FindObjectOfType<PlayerController>();
+
     }
 
-    private void UpdateWorlds() {
-        if (onWorldChange != null) onWorldChange.Invoke(currentWorld);
-        for (var i = 0; i < worlds.Length; i++) {
+    private void UpdateWorlds()
+    {
+
+        for (var i = 0; i < worlds.Length; i++)
+        {
             worlds[i].gameObjects.SetActive(i == currentWorld);
+
         }
+
+
 
         foreach (var portal in FindObjectsOfType<Portal>())
             portal.SetIndex(currentWorld);
@@ -38,25 +50,36 @@ public class LevelManager : MonoBehaviour {
         SwitchSkybox();
     }
 
-    public void ActivateNextWorld() {
+    public void ActivateNextWorld()
+    {
+        sectionCount++;
+
+        if ((sectionCount % 2) == 1)
+        {
+            Debug.Log(playerController.gameObject.transform.position);
+            playerController.respawnPosition.z = playerController.gameObject.transform.position.z + 1f;
+        }
         currentWorld++;
         currentWorld %= worlds.Length;
         UpdateWorlds();
     }
 
-    public void Reset() {
+    public void Reset()
+    {
         currentWorld = 0;
         UpdateWorlds();
     }
 
-    private void SwitchSkybox() {
+    private void SwitchSkybox()
+    {
         RenderSettings.skybox = worlds[currentWorld].skybox;
         RenderSettings.fogColor = worlds[currentWorld].color;
     }
 }
 
 [System.Serializable]
-public struct Worlds {
+public struct Worlds
+{
     public Material skybox;
     public Color color;
     public GameObject gameObjects;
