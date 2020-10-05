@@ -9,7 +9,7 @@ public class SpeedLinesBehaviour : MonoBehaviour {
 
     [SerializeField] private float[] _rateOvertime;
     [SerializeField] private float[] _startSpeed;
-    [SerializeField] private float[] _musicPallier;
+    //[SerializeField] private float[] _musicPallier;
 
     private bool[] _pallierReached;
 
@@ -30,7 +30,7 @@ public class SpeedLinesBehaviour : MonoBehaviour {
         _speed = _playerMovement.Speed;
         if (_currentPallier < _speedPallier.Length) {
             if (_speed >= _speedPallier[_currentPallier] && !_pallierReached[_currentPallier]) {
-                AudioManager.instance.SpeedMusicUp(_musicPallier[_currentPallier]);
+                //AudioManager.instance.SpeedMusicUp(_musicPallier[_currentPallier]);
                 _pallierReached[_currentPallier] = true;
                 _system.startSpeed = _startSpeed[_currentPallier];
                 _system.emissionRate = _rateOvertime[_currentPallier];
@@ -42,7 +42,7 @@ public class SpeedLinesBehaviour : MonoBehaviour {
             if (_speed < _speedPallier[_currentPallier - 1] && _pallierReached[_currentPallier - 1]) {
                 _currentPallier--;
                 _pallierReached[_currentPallier] = false;
-                AudioManager.instance.SlowMusicDown(_musicPallier[_currentPallier - 1]);
+                //AudioManager.instance.SlowMusicDown(_musicPallier[_currentPallier - 1]);
                 _system.startSpeed = _startSpeed[_currentPallier - 1];
                 _system.emissionRate = _rateOvertime[_currentPallier - 1];
             }
