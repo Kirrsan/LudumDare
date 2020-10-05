@@ -20,7 +20,7 @@ public class BlockSpawnAnimation : MonoBehaviour {
 
     private float xOffset;
 
-    private void Awake() {
+    private void Start() {
         if (!player)
             player = FindObjectOfType<PlayerMovement>();
 
