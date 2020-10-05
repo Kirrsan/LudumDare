@@ -71,8 +71,8 @@ public class BlockSpawnAnimation : MonoBehaviour {
             case Mode.RotateFromBottom:
                 transform.position = new Vector3(
                     targetPosition.x,
-                    targetPosition.y - 30 * (1 - Mathf.Sin(value * Mathf.PI / 2)),
-                    targetPosition.z + 30 * Mathf.Cos(value * Mathf.PI / 2)
+                    targetPosition.y - 50 * (1 - Mathf.Sin(value * Mathf.PI / 2)),
+                    targetPosition.z + 50 * Mathf.Cos(value * Mathf.PI / 2)
                 );
                 transform.eulerAngles = targetAngle + (1 - value) * 90 * Vector3.right;
                 break;
