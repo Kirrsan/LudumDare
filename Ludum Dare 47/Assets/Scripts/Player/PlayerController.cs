@@ -48,10 +48,12 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void Update() {
-        if (playerMovement.speedMultiplier == 0f && IsTouchingGround)
+        if ((playerMovement.isStuck || playerMovement.speedMultiplier == 0f) && IsTouchingGround && levelManager.CurrentWorld == 0) {
             playerMovement.speedMultiplier = 1f;
+            playerMovement.isStuck = false;
+        }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && !playerMovement.isStuck)
             Capacity.Use(this);
 
         if (CheckLoseCondition()) {
@@ -66,14 +68,17 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void FixedUpdate() {
-        Capacity.FixedUpdate(this);
+        if (playerMovement.isStuck)
+            rigidbody.useGravity = true;
+        else
+            Capacity.FixedUpdate(this);
     }
 
     private void Reset() {
         transform.position = respawnPosition;
         playerMovement.speedMultiplier = 0f;
         Rigidbody.velocity = new Vector3(0, Rigidbody.velocity.y, 0);
-        playerMovement.transform.rotation = Quaternion.identity;
+        transform.rotation = Quaternion.identity;
 
         foreach (var capacity in capacities)
             capacity.Reset();

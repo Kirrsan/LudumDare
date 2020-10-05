@@ -23,8 +23,9 @@ public class BlockSpawnAnimation : MonoBehaviour {
         }
 
         var dist = targetPosition.z - player.transform.position.z;
-        var minDist = 2 * player.Speed;
-        var maxDist = 4 * player.Speed;
+        var speed = player.speedMultiplier == 0f ? player.BaseSpeed : player.Speed;
+        var minDist = 2 * speed;
+        var maxDist = 4 * speed;
 
         if (dist > maxDist) {
             SetValue(0);

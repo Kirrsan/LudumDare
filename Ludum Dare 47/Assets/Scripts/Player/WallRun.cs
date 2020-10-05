@@ -16,7 +16,7 @@ public class WallRun : ICapacity {
     public void Reset() => state = new Gliding(Glide, GlideDecrease);
 
     public void FixedUpdate(PlayerController player) {
-        player.Rigidbody.useGravity = state is Gliding && player.Rigidbody.velocity.z > 0.01f;
+        player.Rigidbody.useGravity = state is Gliding;
         state = state.FixedUpdate(player);
     }
 
@@ -46,8 +46,11 @@ public class WallRun : ICapacity {
 
         public IState Use(PlayerController player) {
             var result = RaycastWalls(player);
-            if (result.wall != Wall.None)
-                return new DashingToWall(result, player.transform.position, result.hit.point);
+            if (result.wall != Wall.None) {
+                var targetPosition = result.hit.point + (result.IsLeftWall ? Vector3.right : Vector3.left);
+                return new DashingToWall(result, player.transform.position, targetPosition);
+            }
+
             return this;
         }
 
@@ -79,11 +82,17 @@ public class WallRun : ICapacity {
         }
 
         public IState FixedUpdate(PlayerController player) {
-            player.Rigidbody.velocity = new Vector3(0, 0, player.Rigidbody.velocity.z);
+            player.Rigidbody.useGravity = !player.IsTouchingGround;
+            if (!player.Rigidbody.useGravity)
+                player.Rigidbody.velocity = new Vector3(0, 0, player.Rigidbody.velocity.z);
+
             return this;
         }
 
         public IState Use(PlayerController player) {
+            if (!player.IsTouchingGround)
+                return this;
+
             var duration = Mathf.Abs(player.transform.position.x) / player.PlayerMovement.Speed;
             var targetY = Mathf.Max(DashTargetY, player.transform.position.y);
             var targetPosition = new Vector3(0, targetY, player.transform.position.z + duration * player.Rigidbody.velocity.z);
@@ -105,10 +114,17 @@ public class WallRun : ICapacity {
         public IState FixedUpdate(PlayerController player) {
             var progress = Mathf.InverseLerp(startingPosition.x, targetPosition.x, player.transform.position.x);
             player.transform.eulerAngles = progress * (result.IsLeftWall ? -90 : 90) * Vector3.forward;
-            player.Rigidbody.velocity = new Vector3(result.IsLeftWall ? -player.PlayerMovement.Speed : player.PlayerMovement.Speed, 0, player.Rigidbody.velocity.z);
+            player.Rigidbody.velocity = new Vector3(
+                result.IsLeftWall ? -player.PlayerMovement.Speed : player.PlayerMovement.Speed,
+                0,
+                player.Rigidbody.velocity.z
+            );
 
-            if (player.IsTouchingGround)
+            if (player.IsTouchingGround) {
+                player.transform.eulerAngles = (result.IsLeftWall ? -90 : 90) * Vector3.forward;
+                player.Rigidbody.velocity = new Vector3(0, 0, player.Rigidbody.velocity.z);
                 return new Running(result.IsLeftWall);
+            }
 
             return this;
         }
