@@ -2,16 +2,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DeactivateSections : MonoBehaviour
 {
 
     public GameObject[] sections;
+
+    public Text sectionTxt;
     
     public static int sectionIndex = 0;
 
     private void Start()
     {
+        sectionTxt.text = "Sector: " + (sectionIndex + 1).ToString();
         for (int i = 3; i < sections.Length; i++)
         {
             sections[i].SetActive(false);
@@ -27,6 +31,7 @@ public class DeactivateSections : MonoBehaviour
             sections[index + 3].SetActive(true);
         
         sectionIndex++;
+        sectionTxt.text = "Sector: " + (sectionIndex + 1).ToString();
     }
 
     public void ResetSections()
