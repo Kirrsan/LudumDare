@@ -46,6 +46,7 @@ public class DeactivateSections : MonoBehaviour
         }
 
         sectionIndex = 0;
+        sectionTxt.text = "Sector: " + (sectionIndex + 1).ToString();
     }
     
     
