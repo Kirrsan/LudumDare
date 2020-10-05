@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour {
     private ICapacity Capacity => capacities[levelManager.CurrentWorld];
 
     private LevelManager levelManager;
+    public DeactivateSections deactivateSectionManager;
 
     private new Rigidbody rigidbody;
     public Rigidbody Rigidbody => rigidbody;
@@ -79,6 +80,7 @@ public class PlayerController : MonoBehaviour {
 
     private void Reset() {
         transform.position = respawnPosition;
+        deactivateSectionManager.ResetSections();
         playerMovement.speedMultiplier = 0f;
         Rigidbody.velocity = new Vector3(0, Rigidbody.velocity.y, 0);
         transform.rotation = Quaternion.identity;
