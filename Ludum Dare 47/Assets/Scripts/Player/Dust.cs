@@ -18,7 +18,7 @@ public class Dust : MonoBehaviour {
 
     private void Update() {
         if (_ground) {
-            if (!_groundParent.activeSelf) {
+            if (!_ground.activeSelf) {
                 _isGrounded = false;
                 StopWallEffects();
             }
@@ -32,7 +32,8 @@ public class Dust : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other) {
         if (other.CompareTag("Sol")) {
-            if(transform.parent.rotation.z != 0)
+            _ground = other.gameObject;
+            if (transform.parent.rotation.z != 0)
             {
                 if(transform.parent.rotation.z < 0)
                 {
@@ -46,8 +47,8 @@ public class Dust : MonoBehaviour {
             else
             {
                 _isGrounded = true;
+                print(_ground.name);
                 _ground = other.gameObject;
-                _groundParent = _ground.transform.parent.gameObject;
                 if (_gameStartDelay)
                 {
                     AudioManager.instance.Play("Landing");
