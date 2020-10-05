@@ -50,6 +50,7 @@ public class PlayerController : MonoBehaviour {
 
     private void Update() {
         if ((playerMovement.isStuck || playerMovement.speedMultiplier == 0f) && IsTouchingGround && levelManager.CurrentWorld == 0) {
+            animator.Play("Landing");
             playerMovement.speedMultiplier = 1f;
             playerMovement.isStuck = false;
         }
@@ -67,7 +68,6 @@ public class PlayerController : MonoBehaviour {
 
         animator.SetFloat("Velocity Y", rigidbody.velocity.y);
         animator.SetBool("IsGrounded", IsTouchingGround);
-        animator.SetBool("IsLanding", playerMovement.speedMultiplier == 0f);
     }
 
     private void FixedUpdate() {
