@@ -24,6 +24,7 @@ public class ShowText : MonoBehaviour
     {
         if (!_hasShownText)
         {
+            PlaySound("InterfaceClick");
             _text.SetActive(false);
             _text.SetActive(true);
             _hasShownText = true;
@@ -41,6 +42,11 @@ public class ShowText : MonoBehaviour
                 _text.GetComponent<Animator>().SetTrigger("mustDisppear");
             }
         }
+    }
+
+    public void PlaySound(string soundName)
+    {
+        AudioManager.instance.Play(soundName);
     }
 
 }

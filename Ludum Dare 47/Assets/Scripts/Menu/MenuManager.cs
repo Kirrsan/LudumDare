@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using System.Collections;
 
 public class MenuManager : MonoBehaviour
 {
@@ -44,6 +45,13 @@ public class MenuManager : MonoBehaviour
 
     public void Play()
     {
+        AudioManager.instance.Play("InterfaceSelected");
+        StartCoroutine(WaitAndLaunchGame());
+    }
+
+    private IEnumerator WaitAndLaunchGame()
+    {
+        yield return new WaitForSeconds(AudioManager.instance.GetClipLength("InterfaceSelected"));
         SceneManager.LoadScene(_sceneToLoad);
     }
 

@@ -62,25 +62,25 @@ MonoBehaviour:
     source: {fileID: 0}
   - clipName: Portal
     clip:
-    - {fileID: 8300000, guid: 6e6d871b3c2599547bd5aba909a584ae, type: 3}
-    - {fileID: 8300000, guid: ce131b4c6bc38ef4b81b5f3521d67aff, type: 3}
-    - {fileID: 8300000, guid: 6a7f84a8a14bdaa49913194d2d89b49d, type: 3}
+    - {fileID: 8300000, guid: 992f63a5fb19590498ea396c613ae29d, type: 3}
+    - {fileID: 8300000, guid: 8c35450446eedc04db75174990e03f6e, type: 3}
+    - {fileID: 8300000, guid: b9fa64142cdc6ed408fd45c62ed018c4, type: 3}
     volume: 1
     priority: 0
     loop: 0
     source: {fileID: 0}
   - clipName: Rewind
     clip:
-    - {fileID: 8300000, guid: 87eefd0c8a2f9d04c886cbbb4c8a9117, type: 3}
-    volume: 0.3
-    priority: 0
+    - {fileID: 8300000, guid: 7c6a6d8fd55dc5a488f3b43c4ab7f443, type: 3}
+    - {fileID: 8300000, guid: 969d47e2d9c448f4181126898db41325, type: 3}
+    - {fileID: 8300000, guid: 3f20c2d123868934d8a78a48b3d381be, type: 3}
+    volume: 0.8
+    priority: 100
     loop: 0
     source: {fileID: 0}
   - clipName: Jump
     clip:
-    - {fileID: 8300000, guid: c748188a8f850d04e8a721db0336cdef, type: 3}
-    - {fileID: 8300000, guid: a3e4db526d819944bbd78b3f2a7ac0fc, type: 3}
-    - {fileID: 8300000, guid: 2112fa48dc689c24fbe027ed9c70efb5, type: 3}
+    - {fileID: 8300000, guid: 0ce42add25fca52438db5fa8ef95d7a8, type: 3}
     volume: 1
     priority: 0
     loop: 0
@@ -94,42 +94,51 @@ MonoBehaviour:
     source: {fileID: 0}
   - clipName: DoubleJump
     clip:
-    - {fileID: 8300000, guid: 24654a81c089a8944ae9cb59c4ad7623, type: 3}
+    - {fileID: 8300000, guid: 626da9769e32de74da5fc8a003ebac20, type: 3}
     volume: 1
     priority: 0
     loop: 0
     source: {fileID: 0}
   - clipName: StickToWall
     clip:
-    - {fileID: 8300000, guid: 1610ebbbee5ca1b49b315dd8294bfe91, type: 3}
+    - {fileID: 8300000, guid: 8b3058a83aaff8c4795260567e870d3c, type: 3}
+    - {fileID: 8300000, guid: 8c1a535655f178547b29e71ff7f11925, type: 3}
     volume: 1
     priority: 0
     loop: 0
     source: {fileID: 0}
   - clipName: Step
     clip:
-    - {fileID: 8300000, guid: 7ea502a1c416964489f501c0d7544125, type: 3}
-    - {fileID: 8300000, guid: 3d5438953bed47f4aa532240142a683e, type: 3}
-    - {fileID: 8300000, guid: 857ba71f163ce664e95bd62beed56350, type: 3}
-    - {fileID: 8300000, guid: a85f2a79ef508a540bcea7999826e3fa, type: 3}
-    - {fileID: 8300000, guid: e523fe893019ffa40960a7fe4a64978c, type: 3}
-    - {fileID: 8300000, guid: cccda180acf233946833053b1934e116, type: 3}
-    - {fileID: 8300000, guid: f2c8109bbcb861142afe0822d285a8fd, type: 3}
-    - {fileID: 8300000, guid: ab868cd0f314e6d43b6810832e5eba81, type: 3}
-    volume: 1
-    priority: 150
+    - {fileID: 8300000, guid: edc47cfdaf90c80419c31eb3f85be2aa, type: 3}
+    - {fileID: 8300000, guid: a5e467e24d4e29f4396d71b3a203a4ae, type: 3}
+    volume: 0.4
+    priority: 250
     loop: 0
     source: {fileID: 0}
   - clipName: Music
     clip:
-    - {fileID: 8300000, guid: bdd152f0fd81cb946ab02dd7186af384, type: 3}
-    volume: 1
+    - {fileID: 8300000, guid: abfb3509a6e1ead41862e225be079c74, type: 3}
+    volume: 0.3
     priority: 256
     loop: 1
     source: {fileID: 0}
   - clipName: Win
     clip:
     - {fileID: 8300000, guid: 06b5a06cb4d333948a30b2e8b9de268d, type: 3}
+    volume: 1
+    priority: 0
+    loop: 0
+    source: {fileID: 0}
+  - clipName: InterfaceClick
+    clip:
+    - {fileID: 8300000, guid: 2b988a1d99c1aa442932ee1ccb8c757c, type: 3}
+    volume: 1
+    priority: 0
+    loop: 0
+    source: {fileID: 0}
+  - clipName: InterfaceSelected
+    clip:
+    - {fileID: 8300000, guid: bb3e2a73288691c4ba4d44d948bcf074, type: 3}
     volume: 1
     priority: 0
     loop: 0
@@ -261,3 +270,4 @@ MonoBehaviour:
   - skybox: {fileID: 2100000, guid: 2bd8959f5fbd3644aa33af1a155fc147, type: 2}
     color: {r: 0.9150943, g: 0.5551265, b: 0.43596473, a: 1}
     gameObjects: {fileID: 0}
+  portals: []
