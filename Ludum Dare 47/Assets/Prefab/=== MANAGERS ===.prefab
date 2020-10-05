@@ -79,7 +79,7 @@ MonoBehaviour:
   - clipName: Jump
     clip:
     - {fileID: 8300000, guid: 0ce42add25fca52438db5fa8ef95d7a8, type: 3}
-    volume: 1
+    volume: 0.4
     priority: 0
     loop: 0
     source: {fileID: 0}

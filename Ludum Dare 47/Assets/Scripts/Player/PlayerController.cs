@@ -58,6 +58,7 @@ public class PlayerController : MonoBehaviour {
 
         if (CheckLoseCondition()) {
             AudioManager.instance.Play("Rewind");
+            if (levelManager.onReset != null) levelManager.onReset.Invoke();
             FindObjectOfType<CameraFollow>().transform.position += respawnPosition - transform.position;
             Reset();
             levelManager.Reset();

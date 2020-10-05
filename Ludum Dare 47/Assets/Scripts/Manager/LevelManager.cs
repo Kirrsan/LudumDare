@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 
 public class LevelManager : MonoBehaviour {
+
     public static LevelManager instance;
 
     [SerializeField] private Worlds[] worlds;
+    public System.Action onReset;
 
     private int currentWorld;
 
