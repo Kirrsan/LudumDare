@@ -2,6 +2,7 @@
 
 [RequireComponent(typeof(Rigidbody)), RequireComponent(typeof(PlayerMovement))]
 public class PlayerController : MonoBehaviour {
+    [SerializeField] private Animator _animator;
     public static Animator animator;
 
     [SerializeField, Min(0)] private float jumpForce = 20f;
@@ -40,7 +41,7 @@ public class PlayerController : MonoBehaviour {
         rigidbody = GetComponent<Rigidbody>();
         playerMovement = GetComponent<PlayerMovement>();
         levelManager = FindObjectOfType<LevelManager>();
-        animator = GetComponent<Animator>();
+        animator = _animator;
     }
 
     private void Start() {
