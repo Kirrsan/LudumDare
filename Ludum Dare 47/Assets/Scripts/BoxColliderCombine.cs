@@ -3,6 +3,8 @@ using System.Linq;
 using UnityEngine;
 
 public class BoxColliderCombine : MonoBehaviour {
+    [SerializeField] private Transform world1, world2;
+
     private void Awake() {
         var floorTiles = FindObjectsOfType<BoxCollider>()
             .Where(c =>
@@ -12,24 +14,24 @@ public class BoxColliderCombine : MonoBehaviour {
             .OrderBy(c => c.transform.position.z)
             .ToArray();
 
-        Combine(floorTiles, new Bounds(Vector3.zero, new Vector3(4, 0.14f, 4)));
+        Combine(floorTiles, new Bounds(Vector3.zero, new Vector3(4, 0.14f, 4)), world1);
 
         var leftWalls = FindObjectsOfType<BoxCollider>()
             .Where(c => c.gameObject.name.StartsWith("P_Mural_gauche_01"))
             .OrderBy(c => c.transform.position.z)
             .ToArray();
 
-        Combine(leftWalls, new Bounds(2 * Vector3.down, new Vector3(0.3f, 4, 4)));
+        Combine(leftWalls, new Bounds(2 * Vector3.down, new Vector3(0.3f, 4, 4)), world2);
 
         var rightWalls = FindObjectsOfType<BoxCollider>()
             .Where(c => c.gameObject.name.StartsWith("P_Mural_droite_01"))
             .OrderBy(c => c.transform.position.z)
             .ToArray();
 
-        Combine(rightWalls, new Bounds(2 * Vector3.down, new Vector3(0.3f, 4, 4)));
+        Combine(rightWalls, new Bounds(2 * Vector3.down, new Vector3(0.3f, 4, 4)), world2);
     }
 
-    private void Combine(BoxCollider[] colliders, Bounds bounds) {
+    private void Combine(BoxCollider[] colliders, Bounds bounds, Transform world) {
         for (var i = 0; i < colliders.Length - 1;) {
             var tile = colliders[i];
             var previousTile = tile;
@@ -48,9 +50,9 @@ public class BoxColliderCombine : MonoBehaviour {
 
             tile.enabled = false;
 
-            var collider = gameObject.AddComponent<BoxCollider>();
+            var collider = world.gameObject.AddComponent<BoxCollider>();
             collider.size = new Vector3(bounds.size.x, bounds.size.y, tileCount * bounds.size.z);
-            collider.center = tile.transform.position + bounds.center + Vector3.forward * (bounds.size.z * (tileCount - 1) / 2) - transform.position;
+            collider.center = tile.transform.position + bounds.center + Vector3.forward * (bounds.size.z * (tileCount - 1) / 2) - world.transform.position;
         }
     }
 
