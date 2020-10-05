@@ -24,6 +24,7 @@ public class BlockSpawnAnimation : MonoBehaviour {
         if (!player)
             player = FindObjectOfType<PlayerMovement>();
 
+        portal = GetComponent<Portal>();
         renderers = GetComponentsInChildren<Renderer>();
 
         xOffset = Random.Range(-10, 10);
@@ -61,6 +62,8 @@ public class BlockSpawnAnimation : MonoBehaviour {
     }
 
     private void SetValue(float value) {
+        if (portal)
+            portal.SetIndex(value > 0 ? LevelManager.instance.CurrentWorld : -1);
         foreach (var renderer in renderers)
             renderer.enabled = value > 0;
 
