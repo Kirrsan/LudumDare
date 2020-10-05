@@ -92,7 +92,12 @@ public class PlayerController : MonoBehaviour {
 
     public void GoThroughPortal() {
         if (levelManager.CurrentWorld == 1)
+        {
             Jump();
+        }
+
+        rigidbody.gameObject.transform.up = Vector3.up;
+
 
         for (var i = 0; i < levelManager.WorldCount; i++)
             if (i != levelManager.CurrentWorld)
