@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2203492705828828261}
   m_Layer: 0
-  m_Name: SECTIONS CREE
+  m_Name: _SECTIONS CREE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1021,7 +1021,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4940391560944967841, guid: fbf711aff470f3b4f819d42384f2766f, type: 3}
+    - {fileID: 1470512806091502787, guid: fbf711aff470f3b4f819d42384f2766f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: fbf711aff470f3b4f819d42384f2766f, type: 3}
 --- !u!4 &2203492704242313610 stripped
 Transform:
@@ -1771,7 +1773,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4545851383227670938, guid: a58862b377c2e1546b6d62001d4529c7, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a58862b377c2e1546b6d62001d4529c7, type: 3}
 --- !u!4 &2203492705244053936 stripped
 Transform:
