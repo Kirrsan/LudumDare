@@ -164,7 +164,7 @@ MonoBehaviour:
   - clipName: Music
     clip:
     - {fileID: 8300000, guid: ed9147a089b360442b5c2720a680d209, type: 3}
-    volume: 0.3
+    volume: 0.6
     priority: 256
     loop: 1
     source: {fileID: 0}
