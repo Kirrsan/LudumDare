@@ -107,6 +107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee2db8a04a69c894abfda0d7e9cf6d4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mode: 0
   curve:
     serializedVersion: 2
     m_Curve:
