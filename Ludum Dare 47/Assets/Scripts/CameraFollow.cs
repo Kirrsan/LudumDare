@@ -12,6 +12,10 @@ public class CameraFollow : MonoBehaviour {
 
     private float speedMultiplier;
 
+    private Vector3 WorldOffset => worldOffsets[levelManager.CurrentWorld];
+    private Vector3 SmoothWorldOffset => worldOffset = Vector3.Lerp(worldOffset, WorldOffset, 0.1f);
+    private Vector3 worldOffset;
+
     private void Awake() {
         levelManager = FindObjectOfType<LevelManager>();
     }
@@ -20,7 +24,7 @@ public class CameraFollow : MonoBehaviour {
         if (!playerController)
             return;
 
-        var targetPosition = playerController.transform.position + worldOffsets[levelManager.CurrentWorld];
+        var targetPosition = playerController.transform.position + SmoothWorldOffset;
         transform.position = Vector3.Lerp(transform.position, targetPosition, lerpAmount);
 
         speedMultiplier = Mathf.Lerp(speedMultiplier, playerController.PlayerMovement.speedMultiplier, lerpAmount);

@@ -57,12 +57,15 @@ public class WallRun : ICapacity {
         }
 
         private WallRaycastResult RaycastWalls(PlayerController player) {
-            var leftRaycast = Physics.Raycast(player.transform.position, new Vector3(-player.PlayerMovement.Speed, 0, player.Rigidbody.velocity.z), out var leftHit, 10, player.Ground);
-            var rightRaycast = Physics.Raycast(player.transform.position, new Vector3(player.PlayerMovement.Speed, 0, player.Rigidbody.velocity.z), out var rightHit, 10, player.Ground);
+            var leftRaycast = Physics.Raycast(player.transform.position, Vector3.left + Vector3.forward, out var leftHit, 10, player.Ground);
+            var rightRaycast = Physics.Raycast(player.transform.position, Vector3.right + Vector3.forward, out var rightHit, 10, player.Ground);
 
             if (leftRaycast && rightRaycast) {
-                leftRaycast = !wasLeftWall;
-                rightRaycast = wasLeftWall;
+                AudioManager.instance.Play("Dash");
+                PlayerController.animator.Play("Dash");
+                if (wasLeftWall)
+                    return new WallRaycastResult(Wall.Right, rightHit);
+                return new WallRaycastResult(Wall.Left, leftHit);
             }
 
             if (leftRaycast) {
