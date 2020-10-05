@@ -1,10 +1,7 @@
-﻿using System.Collections;
-using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody)), RequireComponent(typeof(PlayerMovement))]
-public class PlayerController : MonoBehaviour
-{
+public class PlayerController : MonoBehaviour {
     public static Animator animator;
 
     [SerializeField, Min(0)] private float jumpForce = 20f;
@@ -18,34 +15,32 @@ public class PlayerController : MonoBehaviour
         public float radius;
     }
 
-    [SerializeField] private Sphere[] sphereCasts;
+    [SerializeField] private Sphere sphereCast;
 
     private readonly ICapacity[] capacities = {new DoubleJump(), new WallRun()};
+    private ICapacity Capacity => capacities[levelManager.CurrentWorld];
 
     private LevelManager levelManager;
 
     private new Rigidbody rigidbody;
+    public Rigidbody Rigidbody => rigidbody;
 
     private PlayerMovement playerMovement;
     public PlayerMovement PlayerMovement => playerMovement;
 
-    [SerializeField] private bool isGrounded;
-    public bool IsGrounded => isGrounded;
-
     public LayerMask Ground => ground;
 
-    private GravityDirection gravityDirection = GravityDirection.Down;
-
     [SerializeField] private GameObject[] reactors;
-    
-    private int _numberOfWorlds;
+
+    public bool IsTouchingGround =>
+        rigidbody.velocity.y <= 0.01f
+        && Physics.CheckSphere(transform.position + transform.rotation * sphereCast.center, sphereCast.radius, ground);
 
     private void Awake() {
         rigidbody = GetComponent<Rigidbody>();
         playerMovement = GetComponent<PlayerMovement>();
         levelManager = FindObjectOfType<LevelManager>();
         animator = GetComponent<Animator>();
-        _numberOfWorlds = levelManager.GetWorldArrayLength();
     }
 
     private void Start() {
@@ -53,84 +48,53 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Update() {
-        if (playerMovement.speedMultiplier == 0f && isGrounded)
+        if (playerMovement.speedMultiplier == 0f && IsTouchingGround)
             playerMovement.speedMultiplier = 1f;
 
         if (Input.GetKeyDown(KeyCode.Space))
-            capacities[levelManager.CurrentWorld].UseCapacity(this);
+            Capacity.Use(this);
 
         if (CheckLoseCondition()) {
+            AudioManager.instance.Play("Rewind");
             FindObjectOfType<CameraFollow>().transform.position += respawnPosition - transform.position;
-            transform.position = respawnPosition;
-            levelManager.Reset();
             Reset();
+            levelManager.Reset();
         }
+
         animator.SetFloat("Velocity Y", rigidbody.velocity.y);
-        animator.SetBool("IsGrounded", isGrounded);
+        animator.SetBool("IsGrounded", IsTouchingGround);
     }
 
     private void FixedUpdate() {
-        isGrounded = GroundCheck();
-        capacities[levelManager.CurrentWorld].Update(this);
+        Capacity.FixedUpdate(this);
     }
 
     private void Reset() {
-        AudioManager.instance.Play("Rewind");
+        transform.position = respawnPosition;
         playerMovement.speedMultiplier = 0f;
-        SetGravity(GravityDirection.Down);
+        Rigidbody.velocity = new Vector3(0, Rigidbody.velocity.y, 0);
+        playerMovement.transform.rotation = Quaternion.identity;
+
+        foreach (var capacity in capacities)
+            capacity.Reset();
     }
 
-    #region WinLoseCondition
-
-    private bool CheckLoseCondition() => !killLimit.Contains(transform.position) && transform.position.y < killLimit.max.y;
-
-    #endregion
-
-    private bool GroundCheck() =>
-        rigidbody.velocity.y <= 0.01f
-        && sphereCasts.Any(s => Physics.CheckSphere(transform.position + s.center, s.radius, ground));
+    private bool CheckLoseCondition() => transform.position.y < killLimit.max.y && !killLimit.Contains(transform.position);
 
     public void Jump() {
-        switch (gravityDirection) {
-            case GravityDirection.Down:
-                rigidbody.velocity = new Vector3(rigidbody.velocity.x, jumpForce, rigidbody.velocity.z);
-                break;
-            case GravityDirection.Left:
-                rigidbody.velocity = new Vector3(jumpForce, rigidbody.velocity.y, rigidbody.velocity.z);
-                break;
-            case GravityDirection.Right:
-                rigidbody.velocity = new Vector3(-jumpForce, rigidbody.velocity.y, rigidbody.velocity.z);
-                break;
-        }
+        rigidbody.velocity = new Vector3(rigidbody.velocity.x, jumpForce, rigidbody.velocity.z);
     }
 
-    public void SetGravity(GravityDirection direction) {
-        gravityDirection = direction;
-        switch (direction) {
-            case GravityDirection.Down:
-                Physics.gravity = new Vector3(0, -Physics.gravity.magnitude, 0);
-                rigidbody.velocity = new Vector3(0, rigidbody.velocity.y, rigidbody.velocity.z);
-                break;
-            case GravityDirection.Left:
-                Physics.gravity = new Vector3(-Physics.gravity.magnitude, 0, 0);
-                rigidbody.velocity = new Vector3(rigidbody.velocity.x, 0, rigidbody.velocity.z);
-                break;
-            case GravityDirection.Right:
-                Physics.gravity = new Vector3(Physics.gravity.magnitude, 0, 0);
-                rigidbody.velocity = new Vector3(rigidbody.velocity.x, 0, rigidbody.velocity.z);
-                break;
-        }
-    }
-    
-    public void SetActionsAccordingToWorld()
-    {
-        //activate right reactor
-        reactors[levelManager.CurrentWorld].SetActive(true);
-        //deactivate last reactor
-        if(levelManager.CurrentWorld != 0)
-            reactors[levelManager.CurrentWorld - 1].SetActive(false);
-        else
-            reactors[_numberOfWorlds - 1].SetActive(false);
+    public void GoThroughPortal() {
+        if (levelManager.CurrentWorld == 1)
+            Jump();
+
+        for (var i = 0; i < levelManager.WorldCount; i++)
+            if (i != levelManager.CurrentWorld)
+                capacities[i].Reset();
+
+        for (var i = 0; i < levelManager.WorldCount; i++)
+            reactors[i].SetActive(i == levelManager.CurrentWorld);
     }
 
     private void OnTriggerEnter(Collider other) {
@@ -143,11 +107,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Wall"))
-        {
-            playerMovement.rigidbody.velocity = new Vector3(rigidbody.velocity.x, rigidbody.velocity.y, 0f);
+    private void OnCollisionEnter(Collision collision) {
+        if (collision.gameObject.CompareTag("Wall")) {
+            Rigidbody.velocity = new Vector3(rigidbody.velocity.x, rigidbody.velocity.y, 0f);
         }
     }
 
@@ -156,16 +118,9 @@ public class PlayerController : MonoBehaviour
         Gizmos.DrawWireCube(killLimit.center, killLimit.extents);
         Gizmos.color = Color.white;
 
-        foreach (var sphere in sphereCasts)
-            Gizmos.DrawWireSphere(transform.position + sphere.center, sphere.radius);
+        Gizmos.DrawWireSphere(transform.position + transform.rotation * sphereCast.center, sphereCast.radius);
 
-        Gizmos.DrawRay(transform.position, 5 * (transform.forward - transform.right));
-        Gizmos.DrawRay(transform.position, 5 * (transform.forward + transform.right));
+        Gizmos.DrawRay(transform.position, 10 * (transform.forward - transform.right));
+        Gizmos.DrawRay(transform.position, 10 * (transform.forward + transform.right));
     }
-}
-
-public enum GravityDirection {
-    Down,
-    Left,
-    Right
 }

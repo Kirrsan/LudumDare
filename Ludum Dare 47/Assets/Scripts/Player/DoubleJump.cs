@@ -2,31 +2,33 @@
 public class DoubleJump : ICapacity {
     private int jumps;
 
-    public void Update(PlayerController player) {
-        if (player.IsGrounded)
+    public void Reset() {
+        jumps = 0;
+    }
+
+    public void FixedUpdate(PlayerController player) {
+        player.Rigidbody.useGravity = true;
+        if (player.IsTouchingGround)
             jumps = 2;
     }
 
-    public void UseCapacity(PlayerController player) {
+    public void Use(PlayerController player) {
         if (jumps <= 0)
             return;
 
-        if (jumps == 2)
-        {
+        if (jumps == 2) {
             AudioManager.instance.Play("Jump");
             PlayerController.animator.Play("Jump");
-        }
-        else
-        {
+        } else {
             AudioManager.instance.Play("DoubleJump");
             PlayerController.animator.Play("DoubleJump");
         }
+
         player.Jump();
         jumps--;
     }
 
-    public int GetJumpLeft()
-    {
+    public int GetJumpLeft() {
         return jumps;
     }
 }

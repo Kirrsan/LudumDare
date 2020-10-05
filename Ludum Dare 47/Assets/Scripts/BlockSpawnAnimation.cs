@@ -5,32 +5,45 @@ public class BlockSpawnAnimation : MonoBehaviour {
     private static PlayerMovement player;
 
     private Vector3 targetPosition;
-    private Vector3 StartingPosition => targetPosition + positionOffset;
-
-    private Vector3 startingAngle;
-
-    private Vector3 positionOffset;
-    private Vector3 angleOffset;
+    private Vector3 targetAngle;
 
     private void Awake() {
         if (!player)
             player = FindObjectOfType<PlayerMovement>();
 
         targetPosition = transform.position;
-        startingAngle = transform.eulerAngles;
-        positionOffset = new Vector3(Random.Range(-10, 10), Random.Range(-5, -15), Random.Range(0, 5));
-        angleOffset = new Vector3(Random.Range(-90, 90), Random.Range(-90, 90), Random.Range(-90, 90));
+        targetAngle = transform.eulerAngles;
+        SetValue(0);
     }
 
     private void Update() {
-        var dist = targetPosition.z - player.transform.position.z;
+        if (targetPosition.z < player.transform.position.z) {
+            SetValue(1);
+            return;
+        }
 
-        var distRelativeClamped = Mathf.InverseLerp(20, 60, dist);
+        var dist = targetPosition.z - player.transform.position.z;
+        var minDist = 2 * player.Speed;
+        var maxDist = 4 * player.Speed;
+
+        if (dist > maxDist) {
+            SetValue(0);
+            return;
+        }
+
+        var distRelativeClamped = Mathf.InverseLerp(maxDist, minDist, dist);
 
         var curved = curve.length > 0 ? curve.Evaluate(distRelativeClamped) : distRelativeClamped;
 
-        transform.position = Vector3.LerpUnclamped(targetPosition, StartingPosition, curved);
+        SetValue(curved);
+    }
 
-        transform.eulerAngles = startingAngle + curved * angleOffset;
+    private void SetValue(float value) {
+        transform.position = new Vector3(
+            targetPosition.x,
+            targetPosition.y - 30 * (1 - Mathf.Sin(value * Mathf.PI / 2)),
+            targetPosition.z + 30 * Mathf.Cos(value * Mathf.PI / 2)
+        );
+        transform.eulerAngles = targetAngle + (1 - value) * 90 * Vector3.right;
     }
 }

@@ -5007,6 +5007,7 @@ GameObject:
   - component: {fileID: 8103559936389360096}
   - component: {fileID: 1875637035892826418}
   - component: {fileID: 2059947405540949763}
+  - component: {fileID: 2032680221}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -5123,9 +5124,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3da49b8be1ac8f4f8d4a5c2bcf10dc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseSpeed: 15
+  baseSpeed: 20
   speedMultiplier: 1
-  rigidbody: {fileID: 0}
 --- !u!114 &1875637035892826418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5138,26 +5138,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3d761b24a25e4f4cbc44729ee6a1d92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 20
+  jumpForce: 13
   respawnPosition: {x: 0, y: 50, z: 0}
   ground:
     serializedVersion: 2
     m_Bits: 256
   killLimit:
     m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 40, y: 40, z: 10000}
-  sphereCasts:
-  - center: {x: 0, y: -0.535, z: 0}
-    radius: 0.47
-  - center: {x: 0.27, y: 0.5, z: 0}
-    radius: 0.25
-  - center: {x: 0.27, y: -0.5, z: 0}
-    radius: 0.25
-  - center: {x: -0.27, y: 0.5, z: 0}
-    radius: 0.25
-  - center: {x: -0.27, y: -0.5, z: 0}
-    radius: 0.25
-  isGrounded: 0
+    m_Extent: {x: 40, y: 40, z: 20000}
+  sphereCast:
+    center: {x: 0, y: -0.62, z: 0}
+    radius: 0.4
   reactors:
   - {fileID: 2908313452297675095}
   - {fileID: 552301076786773708}
@@ -5198,6 +5189,25 @@ MonoBehaviour:
   - 1.6
   - 1.8
   _system: {fileID: 0}
+--- !u!95 &2032680221
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8103559936389360110}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &8245304128572531971
 GameObject:
   m_ObjectHideFlags: 0

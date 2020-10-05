@@ -1,18 +1,11 @@
 ﻿using UnityEngine;
 
 public class Portal : MonoBehaviour {
-    
-    
-    private BoxCollider boxCollider;
     public PlayerMovement playerMovement;
     public LevelManager lvlManager;
     public float addSpeed;
-    
-    public GameObject[] portalVFX;
 
-    private void Start() {
-        boxCollider = GetComponent<BoxCollider>();
-    }
+    public GameObject[] portalVFX;
 
     private void OnTriggerEnter(Collider other) {
         if (other.gameObject.CompareTag("Player")) {
@@ -20,9 +13,7 @@ public class Portal : MonoBehaviour {
             playerMovement.speedMultiplier = addSpeed;
             lvlManager.ActivateNextWorld();
             PlayerController playerController = other.GetComponent<PlayerController>();
-            playerController.SetActionsAccordingToWorld();
-            if(lvlManager.CurrentWorld == 0)
-                playerController.SetGravity(GravityDirection.Down);
+            playerController.GoThroughPortal();
         }
     }
 }

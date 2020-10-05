@@ -1,4 +1,5 @@
 ﻿public interface ICapacity {
-    void Update(PlayerController player);
-    void UseCapacity(PlayerController player);
+    void Reset();
+    void FixedUpdate(PlayerController player);
+    void Use(PlayerController player);
 }

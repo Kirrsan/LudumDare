@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 345052164619944865}
   - component: {fileID: 2534726508656080747}
   - component: {fileID: 1225136508061138943}
+  - component: {fileID: 2194345504699721319}
   m_Layer: 8
   m_Name: P_Plateforme_sol_01
   m_TagString: Untagged
@@ -94,3 +95,39 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.02, y: 0.020000005, z: 0.00069990096}
   m_Center: {x: 0, y: 0, z: -4.3655756e-11}
+--- !u!114 &2194345504699721319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4048124892394657470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee2db8a04a69c894abfda0d7e9cf6d4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: -0.0691955
+      outSlope: 0.020000689
+      tangentMode: 1
+      weightedMode: 2
+      inWeight: 0.33333334
+      outWeight: 0.5768538
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: -0.35779625
+      outSlope: -0.35779625
+      tangentMode: 0
+      weightedMode: 1
+      inWeight: 0.5613382
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
