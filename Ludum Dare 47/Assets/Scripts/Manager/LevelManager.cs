@@ -6,6 +6,7 @@ public class LevelManager : MonoBehaviour {
 
     [SerializeField] private Worlds[] worlds;
     public System.Action onReset;
+    public System.Action<int> onWorldChange;
 
     private int currentWorld;
 
@@ -26,6 +27,7 @@ public class LevelManager : MonoBehaviour {
     }
 
     private void UpdateWorlds() {
+        if (onWorldChange != null) onWorldChange.Invoke(currentWorld);
         for (var i = 0; i < worlds.Length; i++) {
             worlds[i].gameObjects.SetActive(i == currentWorld);
         }

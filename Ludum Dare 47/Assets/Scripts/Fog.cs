@@ -6,6 +6,7 @@ public class Fog : MonoBehaviour
 {
 
     [SerializeField] private Transform _cloudInFront;
+    [SerializeField] private GameObject[] _cloudCycle;
     private Vector3 _startPosition;
 
     // Start is called before the first frame update
@@ -16,6 +17,11 @@ public class Fog : MonoBehaviour
         LevelManager.instance.onReset += () =>
         {  
             ResetPosition();
+        };
+
+        LevelManager.instance.onWorldChange += (int worldIndex) =>
+        {
+            ChangeFog(worldIndex);
         };
     }
 
@@ -30,6 +36,19 @@ public class Fog : MonoBehaviour
     private void ResetPosition()
     {
         transform.position = _startPosition;
+    }
+
+    private void ChangeFog(int worldIndex)
+    {
+        for(int i = 0; i < _cloudCycle.Length; i++)
+        {
+            if(i == worldIndex)
+                _cloudCycle[i].SetActive(true);
+            else
+            {
+                _cloudCycle[i].SetActive(false);
+            }
+        }
     }
 
 }
