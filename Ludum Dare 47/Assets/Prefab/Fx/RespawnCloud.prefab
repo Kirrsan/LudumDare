@@ -138,7 +138,7 @@ PrefabInstance:
     - target: {fileID: 2521492875262413045, guid: d45ee773d44ff1342a48685994fd12c1,
         type: 3}
       propertyPath: InitialModule.startColor.maxColor.a
-      value: 1
+      value: 0.84313726
       objectReference: {fileID: 0}
     - target: {fileID: 2521492875262413045, guid: d45ee773d44ff1342a48685994fd12c1,
         type: 3}
@@ -203,7 +203,7 @@ PrefabInstance:
     - target: {fileID: 2521492875262416583, guid: d45ee773d44ff1342a48685994fd12c1,
         type: 3}
       propertyPath: InitialModule.startColor.maxColor.a
-      value: 1
+      value: 0.84313726
       objectReference: {fileID: 0}
     - target: {fileID: 2521492875262416583, guid: d45ee773d44ff1342a48685994fd12c1,
         type: 3}
@@ -343,7 +343,7 @@ PrefabInstance:
     - target: {fileID: 2521492875262413045, guid: d45ee773d44ff1342a48685994fd12c1,
         type: 3}
       propertyPath: InitialModule.startColor.maxColor.a
-      value: 1
+      value: 0.84313726
       objectReference: {fileID: 0}
     - target: {fileID: 2521492875262413045, guid: d45ee773d44ff1342a48685994fd12c1,
         type: 3}
@@ -413,7 +413,7 @@ PrefabInstance:
     - target: {fileID: 2521492875262416583, guid: d45ee773d44ff1342a48685994fd12c1,
         type: 3}
       propertyPath: InitialModule.startColor.maxColor.a
-      value: 1
+      value: 0.84313726
       objectReference: {fileID: 0}
     - target: {fileID: 2521492875262416583, guid: d45ee773d44ff1342a48685994fd12c1,
         type: 3}
@@ -558,7 +558,7 @@ PrefabInstance:
     - target: {fileID: 2521492875262413045, guid: d45ee773d44ff1342a48685994fd12c1,
         type: 3}
       propertyPath: InitialModule.startColor.maxColor.a
-      value: 1
+      value: 0.84313726
       objectReference: {fileID: 0}
     - target: {fileID: 2521492875262413045, guid: d45ee773d44ff1342a48685994fd12c1,
         type: 3}
@@ -623,7 +623,7 @@ PrefabInstance:
     - target: {fileID: 2521492875262416583, guid: d45ee773d44ff1342a48685994fd12c1,
         type: 3}
       propertyPath: InitialModule.startColor.maxColor.a
-      value: 1
+      value: 0.84313726
       objectReference: {fileID: 0}
     - target: {fileID: 2521492875262416583, guid: d45ee773d44ff1342a48685994fd12c1,
         type: 3}
