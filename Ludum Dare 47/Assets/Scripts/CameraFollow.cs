@@ -29,10 +29,17 @@ public class CameraFollow : MonoBehaviour {
 
         speedMultiplier = Mathf.Lerp(speedMultiplier, playerController.PlayerMovement.speedMultiplier, lerpAmount);
 
-        transform.forward = Vector3.Lerp(
-            transform.forward,
-            playerController.transform.position + speedMultiplier * 20 * playerController.transform.forward - transform.position,
-            lerpAmount / 10
-        );
+        if (playerController.transform.position.y < -1f || playerController.PlayerMovement.speedMultiplier == 0f)
+            transform.forward = Vector3.Lerp(
+                transform.forward,
+                playerController.transform.position - transform.position,
+                lerpAmount / 10
+            );
+        else
+            transform.forward = Vector3.Lerp(
+                transform.forward,
+                playerController.transform.position + speedMultiplier * 20 * playerController.transform.forward - transform.position,
+                lerpAmount / 10
+            );
     }
 }

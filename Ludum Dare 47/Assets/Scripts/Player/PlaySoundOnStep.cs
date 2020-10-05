@@ -6,7 +6,6 @@ public class PlaySoundOnStep : MonoBehaviour
 {
     public void PlayStep()
     {
-        print("miuaou");
         AudioManager.instance.Play("Step");
     }
 }

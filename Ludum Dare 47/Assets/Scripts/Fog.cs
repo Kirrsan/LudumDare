@@ -29,7 +29,7 @@ public class Fog : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            transform.position = new Vector3(transform.position.x, transform.position.y, _cloudInFront.position.z + 465);
+            transform.position = new Vector3(transform.position.x, transform.position.y, _cloudInFront.position.z + 155);
         }
     }
 

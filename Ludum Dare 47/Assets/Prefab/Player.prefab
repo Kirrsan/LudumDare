@@ -5074,16 +5074,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 7282679563679178190}
   jumpForce: 13
-  respawnPosition: {x: 0, y: 200, z: 0}
+  respawnPosition: {x: 0, y: 150, z: -25}
   ground:
     serializedVersion: 2
     m_Bits: 256
   killLimit:
     m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 40, y: 100, z: 20000}
+    m_Extent: {x: 40, y: 40, z: 20000}
   sphereCast:
     center: {x: 0, y: -0.65, z: 0}
     radius: 0.4
+  deactivateSectionManager: {fileID: 0}
   reactors:
   - {fileID: 8535542045514247595}
   - {fileID: 6449747364852281904}
@@ -5101,22 +5102,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speedPallier:
   - 15
-  - 30
-  - 60
-  - 120
-  - 240
+  - 20
+  - 22
+  - 24
+  - 26
+  - 28
+  - 32
+  - 34
+  - 36
+  - 40
   _rateOvertime:
   - 50
   - 75
   - 100
+  - 110
+  - 115
+  - 120
   - 125
+  - 135
   - 150
+  - 175
   _startSpeed:
   - 50
   - 75
   - 100
+  - 110
+  - 115
+  - 120
   - 125
+  - 135
   - 150
+  - 175
   _musicPallier:
   - 1
   - 1.2
@@ -14689,6 +14705,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6335854745255578149, guid: d8c85b914779e7742a1beeb2b3f1fa48,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7362153413017899305, guid: d8c85b914779e7742a1beeb2b3f1fa48,
         type: 3}
       propertyPath: m_LocalRotation.x
@@ -14788,6 +14809,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -1.332
+      objectReference: {fileID: 0}
+    - target: {fileID: 8654571686587209150, guid: d8c85b914779e7742a1beeb2b3f1fa48,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9076423524109257037, guid: d8c85b914779e7742a1beeb2b3f1fa48,
         type: 3}

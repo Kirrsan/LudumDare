@@ -93,8 +93,10 @@ MonoBehaviour:
   - clipName: Landing
     clip:
     - {fileID: 8300000, guid: 8bc8aa30d87a6374797eebf3f3bb7a89, type: 3}
-    volume: 1
-    priority: 0
+    - {fileID: 8300000, guid: 29ac4d2ac0a6e7c44adc093d6d08c760, type: 3}
+    - {fileID: 8300000, guid: 40091a1308cbfc64ab85323bee3132fc, type: 3}
+    volume: 0.25
+    priority: 55
     loop: 0
     source: {fileID: 0}
   - clipName: Grind
@@ -124,22 +126,22 @@ MonoBehaviour:
     source: {fileID: 0}
   - clipName: Jump
     clip:
-    - {fileID: 8300000, guid: 0ce42add25fca52438db5fa8ef95d7a8, type: 3}
+    - {fileID: 8300000, guid: 626da9769e32de74da5fc8a003ebac20, type: 3}
     volume: 0.4
     priority: 0
     loop: 0
     source: {fileID: 0}
   - clipName: Dash
     clip:
-    - {fileID: 8300000, guid: 490c17fbc3b024f45b37981beba04430, type: 3}
+    - {fileID: 8300000, guid: 0ce42add25fca52438db5fa8ef95d7a8, type: 3}
     volume: 1
     priority: 0
     loop: 0
     source: {fileID: 0}
   - clipName: DoubleJump
     clip:
-    - {fileID: 8300000, guid: 626da9769e32de74da5fc8a003ebac20, type: 3}
-    volume: 1
+    - {fileID: 8300000, guid: 0ce42add25fca52438db5fa8ef95d7a8, type: 3}
+    volume: 0.4
     priority: 0
     loop: 0
     source: {fileID: 0}
@@ -164,8 +166,8 @@ MonoBehaviour:
   - clipName: Music
     clip:
     - {fileID: 8300000, guid: ed9147a089b360442b5c2720a680d209, type: 3}
-    volume: 0.6
-    priority: 256
+    volume: 0.8
+    priority: 50
     loop: 1
     source: {fileID: 0}
   - clipName: Win
@@ -179,14 +181,14 @@ MonoBehaviour:
     clip:
     - {fileID: 8300000, guid: 2b988a1d99c1aa442932ee1ccb8c757c, type: 3}
     volume: 1
-    priority: 0
+    priority: 256
     loop: 0
     source: {fileID: 0}
   - clipName: InterfaceSelected
     clip:
     - {fileID: 8300000, guid: bb3e2a73288691c4ba4d44d948bcf074, type: 3}
     volume: 1
-    priority: 0
+    priority: 256
     loop: 0
     source: {fileID: 0}
 --- !u!1 &3315900120350161812
@@ -232,6 +234,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cbda0832389c54429c89049e384ef5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  world1: {fileID: 0}
+  world2: {fileID: 0}
 --- !u!1 &4078325356545867668
 GameObject:
   m_ObjectHideFlags: 0
@@ -300,6 +304,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  sectionTxt: {fileID: 0}
 --- !u!1 &5608119999857927708
 GameObject:
   m_ObjectHideFlags: 0
