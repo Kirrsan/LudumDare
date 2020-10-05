@@ -82,6 +82,8 @@ public class PlayerController : MonoBehaviour {
         playerMovement.speedMultiplier = 0f;
         Rigidbody.velocity = new Vector3(0, Rigidbody.velocity.y, 0);
         transform.rotation = Quaternion.identity;
+        reactors[0].SetActive(true);
+        reactors[1].SetActive(false);
 
         foreach (var capacity in capacities)
             capacity.Reset();

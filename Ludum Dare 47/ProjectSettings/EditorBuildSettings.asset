@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: 837a53a6eb22f294090e25fc44ea4be6
   - enabled: 1
-    path: Assets/Scenes/Matilde.unity
-    guid: d62d0b709089c3e4b9a60ebad88f135b
+    path: Assets/Scenes/Main.unity
+    guid: b665e6aec67f6dc468920e5ea98effa0
   m_configObjects: {}

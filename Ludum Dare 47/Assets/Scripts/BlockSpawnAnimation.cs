@@ -14,7 +14,7 @@ public class BlockSpawnAnimation : MonoBehaviour {
     private Vector3 targetPosition;
     private Vector3 targetAngle;
 
-    private new Renderer renderer;
+    private Renderer[] renderers;
 
     private Portal portal;
 
@@ -24,9 +24,7 @@ public class BlockSpawnAnimation : MonoBehaviour {
         if (!player)
             player = FindObjectOfType<PlayerMovement>();
 
-        renderer = GetComponent<Renderer>();
-
-        portal = GetComponent<Portal>();
+        renderers = GetComponentsInChildren<Renderer>();
 
         xOffset = Random.Range(-10, 10);
 
@@ -63,9 +61,8 @@ public class BlockSpawnAnimation : MonoBehaviour {
     }
 
     private void SetValue(float value) {
-        renderer.enabled = value > 0;
-        if (portal)
-            portal.SetIndex(value > 0 ? LevelManager.instance.CurrentWorld : -1);
+        foreach (var renderer in renderers)
+            renderer.enabled = value > 0;
 
         switch (mode) {
             case Mode.RotateFromBottom:

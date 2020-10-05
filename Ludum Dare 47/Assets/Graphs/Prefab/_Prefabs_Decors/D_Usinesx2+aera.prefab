@@ -22,8 +22,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4287430221500792091}
+  - component: {fileID: -4998957482294863886}
   m_Layer: 0
-  m_Name: Usinesx2+aera
+  m_Name: D_Usinesx2+aera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57,6 +58,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-4998957482294863886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2965981401635677574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee2db8a04a69c894abfda0d7e9cf6d4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mode: 0
+  curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &399007751894456106
 PrefabInstance:
   m_ObjectHideFlags: 0

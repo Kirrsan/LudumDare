@@ -42,7 +42,6 @@ GameObject:
   - component: {fileID: 2466486686897828591}
   - component: {fileID: 648070144295453620}
   - component: {fileID: 5065953782629359261}
-  - component: {fileID: 8872349428356785626}
   m_Layer: 0
   m_Name: P_Grillage_large
   m_TagString: Untagged
@@ -111,16 +110,3 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &8872349428356785626
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3995608219845669986}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.08, y: 0.08000002, z: 0}
-  m_Center: {x: 0, y: 0, z: 0}

@@ -1,5 +1,51 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &270298450153546647
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1922729116071656603}
+  - component: {fileID: 1834229144753378488}
+  m_Layer: 0
+  m_Name: MeterManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1922729116071656603
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 270298450153546647}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5608120000055187366}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1834229144753378488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 270298450153546647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5deb1e4f1fc4390428cf7c50f30c1ff8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _player: {fileID: 0}
+  _levelEnd: {fileID: 0}
+  _metersLeft: {fileID: 0}
 --- !u!1 &3067993143204273055
 GameObject:
   m_ObjectHideFlags: 0
@@ -109,6 +155,8 @@ MonoBehaviour:
     clip:
     - {fileID: 8300000, guid: edc47cfdaf90c80419c31eb3f85be2aa, type: 3}
     - {fileID: 8300000, guid: a5e467e24d4e29f4396d71b3a203a4ae, type: 3}
+    - {fileID: 8300000, guid: 29ac4d2ac0a6e7c44adc093d6d08c760, type: 3}
+    - {fileID: 8300000, guid: 40091a1308cbfc64ab85323bee3132fc, type: 3}
     volume: 0.15
     priority: 250
     loop: 0
@@ -122,7 +170,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - clipName: Win
     clip:
-    - {fileID: 8300000, guid: 06b5a06cb4d333948a30b2e8b9de268d, type: 3}
+    - {fileID: 8300000, guid: 9eb2a1051a2083940bbf5ca35fcd202e, type: 3}
     volume: 1
     priority: 0
     loop: 0
@@ -259,6 +307,7 @@ Transform:
   - {fileID: 3677961928027203400}
   - {fileID: 8615973772380784844}
   - {fileID: 7282244683551529034}
+  - {fileID: 1922729116071656603}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
