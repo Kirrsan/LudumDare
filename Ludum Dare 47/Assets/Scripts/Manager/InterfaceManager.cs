@@ -2,6 +2,7 @@
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System.Collections;
 
 public class InterfaceManager : MonoBehaviour
 {
@@ -9,11 +10,14 @@ public class InterfaceManager : MonoBehaviour
     [SerializeField] private GameObject _gamePanel;
     [SerializeField] private GameObject _pausePanel;
     [SerializeField] private GameObject _winPanel;
-    [SerializeField] private GameObject _loosePanel;
+    [SerializeField] private GameObject _tutoPanel;
 
     [SerializeField] private Button _playButton;
+    [SerializeField] private Button _backButton;
+    [SerializeField] private Button _tutoButton;
     [SerializeField] private EventSystem _eventSystem;
     private GameObject _lastSelectedObject;
+    private GameObject _currentSelectedObject;
 
 
     // Start is called before the first frame update
@@ -32,11 +36,10 @@ public class InterfaceManager : MonoBehaviour
             {
                 GoToWin();
             }
-            else if (GameManager.instance.state == State.LOSE)
-            {
-                GoToLoose();
-            }
         };
+        _eventSystem.SetSelectedGameObject(_playButton.gameObject);
+        _currentSelectedObject = _eventSystem.currentSelectedGameObject;
+        _lastSelectedObject = _currentSelectedObject;
         GoToGame();
     }
 
@@ -46,26 +49,30 @@ public class InterfaceManager : MonoBehaviour
         if (EventSystem.current.currentSelectedGameObject == null)
         {
             _eventSystem.SetSelectedGameObject(_lastSelectedObject);
+            _currentSelectedObject = _eventSystem.currentSelectedGameObject;
         }
-        else
+        else if (_currentSelectedObject != _eventSystem.currentSelectedGameObject)
         {
-            _lastSelectedObject = _eventSystem.currentSelectedGameObject;
+            _lastSelectedObject = _currentSelectedObject;
+            _currentSelectedObject = _eventSystem.currentSelectedGameObject;
         }
     }
 
-    private void GoInpause()
+    public void GoInpause()
     {
         Time.timeScale = 0;
+        _tutoPanel.SetActive(false);
         _gamePanel.SetActive(false);
         _pausePanel.SetActive(true);
-        _playButton.Select();
+        _lastSelectedObject.GetComponent<Button>().Select();
+        _lastSelectedObject.GetComponent<Button>().GetComponent<Animator>().SetTrigger("Selected");
     }
 
     private void GoToGame()
     {
         _pausePanel.SetActive(false);
+        _tutoPanel.SetActive(false);
         _winPanel.SetActive(false);
-        _loosePanel.SetActive(false);
         _gamePanel.SetActive(true);
         Time.timeScale = 1;
     }
@@ -77,18 +84,18 @@ public class InterfaceManager : MonoBehaviour
         _winPanel.SetActive(true);
     }
 
-    private void GoToLoose()
+    public void GoToTuto()
     {
-        Time.timeScale = 0;
-        _gamePanel.SetActive(false);
         _pausePanel.SetActive(false);
-        _loosePanel.SetActive(true);
+        _tutoPanel.SetActive(true);
+        _backButton.Select();
     }
 
     #region Button Functions
 
     public void Resume()
     {
+        _lastSelectedObject = _playButton.gameObject;
         GameManager.instance.ChangeState(State.INGAME);
         Time.timeScale = 1;
     }
