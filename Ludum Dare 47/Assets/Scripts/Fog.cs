@@ -12,6 +12,7 @@ public class Fog : MonoBehaviour
     void Start()
     {
         _startPosition = transform.position;
+
         LevelManager.instance.onReset += () =>
         {  
             ResetPosition();
@@ -22,7 +23,7 @@ public class Fog : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            transform.position = new Vector3(transform.position.x, transform.position.y, _cloudInFront.position.z + 155);
+            transform.position = new Vector3(transform.position.x, transform.position.y, _cloudInFront.position.z + 465);
         }
     }
 
