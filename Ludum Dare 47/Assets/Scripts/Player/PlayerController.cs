@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour {
     public static Animator animator;
 
     [SerializeField, Min(0)] private float jumpForce = 20f;
-    [SerializeField] public Vector3 respawnPosition = new Vector3(0, 50, -20);
+    [SerializeField] private Vector3 respawnPosition = new Vector3(0, 50, -20);
     [SerializeField] private LayerMask ground;
     [SerializeField] private Bounds killLimit;
 
