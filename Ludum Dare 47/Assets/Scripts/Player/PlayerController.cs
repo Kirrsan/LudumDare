@@ -66,6 +66,7 @@ public class PlayerController : MonoBehaviour {
 
         animator.SetFloat("Velocity Y", rigidbody.velocity.y);
         animator.SetBool("IsGrounded", IsTouchingGround);
+        animator.SetBool("IsLanding", playerMovement.speedMultiplier == 0f);
     }
 
     private void FixedUpdate() {
