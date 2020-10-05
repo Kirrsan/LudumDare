@@ -95,9 +95,9 @@ public class PlayerController : MonoBehaviour {
         if (levelManager.CurrentWorld == 1)
             Jump();
 
+        rigidbody.velocity = new Vector3(0, 0, rigidbody.velocity.z);
         transform.position = new Vector3(0, transform.position.y, transform.position.z);
         transform.up = Vector3.up;
-
 
         for (var i = 0; i < levelManager.WorldCount; i++)
             if (i != levelManager.CurrentWorld)
