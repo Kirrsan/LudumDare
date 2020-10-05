@@ -5,7 +5,7 @@ using UnityEngine;
 public class Dust : MonoBehaviour {
 
     [SerializeField] private ParticleSystem _dustCloud;
-    [SerializeField] private GameObject _wallParticle;
+    [SerializeField] private GameObject[] _wallParticle;
     private bool _gameStartDelay;
     private bool _isGrounded = false;
     private GameObject _ground;
@@ -14,13 +14,14 @@ public class Dust : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         StartCoroutine(WaitAndStart());
-        //StartCoroutine(WaitAndTakeAStep());
+        StartCoroutine(WaitAndTakeAStep());
     }
 
     private void Update() {
         if (_ground) {
             if (!_groundParent.activeSelf) {
                 _isGrounded = false;
+                StopWallEffects();
             }
         }
     }
@@ -32,18 +33,29 @@ public class Dust : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other) {
         if (other.CompareTag("Sol")) {
-            _isGrounded = true;
-            _ground = other.gameObject;
-            _groundParent = _ground.transform.parent.gameObject;
-            if (_gameStartDelay) {
-                AudioManager.instance.Play("Landing");
-                _dustCloud.Play();
-                //StartCoroutine(WaitBeforeStep());
+            if(transform.parent.rotation.z != 0)
+            {
+                if(transform.parent.rotation.z < 0)
+                {
+                    DoWallEffects(0);
+                }
+                else
+                {
+                    DoWallEffects(1);
+                }
             }
-        }
-        else if (other.gameObject.CompareTag("Wall"))
-        {
-            DoWallEffects();
+            else
+            {
+                _isGrounded = true;
+                _ground = other.gameObject;
+                _groundParent = _ground.transform.parent.gameObject;
+                if (_gameStartDelay)
+                {
+                    AudioManager.instance.Play("Landing");
+                    _dustCloud.Play();
+                    StartCoroutine(WaitBeforeStep());
+                }
+            }
         }
     }
 
@@ -51,36 +63,39 @@ public class Dust : MonoBehaviour {
         if (other.CompareTag("Sol")) {
             _isGrounded = false;
             AudioManager.instance.Stop("Step");
-        }
-        else if (other.gameObject.CompareTag("Wall"))
-        {
             StopWallEffects();
         }
     }
 
-    //private IEnumerator WaitBeforeStep() {
-    //    yield return new WaitForSeconds(AudioManager.instance.GetClipLength("Landing"));
-    //    StartCoroutine(WaitAndTakeAStep());
-    //}
-
-    //private IEnumerator WaitAndTakeAStep() {
-    //    AudioManager.instance.Play("Step");
-    //    yield return new WaitForSeconds(0.25f);
-    //    if (_isGrounded) {
-    //        StartCoroutine(WaitAndTakeAStep());
-    //    }
-    //}
-    private void DoWallEffects()
+    private IEnumerator WaitBeforeStep()
     {
-        //AudioManager.instance.Play("StickToWall");
-        //StartCoroutine(WaitAndGrind());
-        _wallParticle.SetActive(true);
+        yield return new WaitForSeconds(0.25f);
+        StartCoroutine(WaitAndTakeAStep());
+    }
+
+    private IEnumerator WaitAndTakeAStep()
+    {
+        AudioManager.instance.Play("Step");
+        yield return new WaitForSeconds(0.25f);
+        if (_isGrounded)
+        {
+            StartCoroutine(WaitAndTakeAStep());
+        }
+    }
+    private void DoWallEffects(int index)
+    {
+        AudioManager.instance.Play("StickToWall");
+        StartCoroutine(WaitAndGrind());
+        _wallParticle[index].SetActive(true);
     }
 
     private void StopWallEffects()
     {
         AudioManager.instance.Stop("Grind");
-        _wallParticle.SetActive(false);
+        foreach(GameObject particle in _wallParticle)
+        {
+            particle.SetActive(false);
+        }
     }
 
     private IEnumerator WaitAndGrind()

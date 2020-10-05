@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0e4784d9e2150044b0a998cf1340742, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cloudInFront: {fileID: 4046798578704212156}
+  _cloudInFront: {fileID: 4046798579193186646}
 --- !u!65 &4046798579009001508
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -226,7 +226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0e4784d9e2150044b0a998cf1340742, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cloudInFront: {fileID: 4046798578596121860}
+  _cloudInFront: {fileID: 4046798578704212156}
 --- !u!65 &4046798579193186647
 BoxCollider:
   m_ObjectHideFlags: 0
