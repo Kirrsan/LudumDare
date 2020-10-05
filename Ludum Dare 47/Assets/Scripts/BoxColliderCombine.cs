@@ -50,7 +50,7 @@ public class BoxColliderCombine : MonoBehaviour {
 
             var collider = gameObject.AddComponent<BoxCollider>();
             collider.size = new Vector3(bounds.size.x, bounds.size.y, tileCount * bounds.size.z);
-            collider.center = tile.transform.position + bounds.center + Vector3.forward * (bounds.size.z * (tileCount - 1) / 2);
+            collider.center = tile.transform.position + bounds.center + Vector3.forward * (bounds.size.z * (tileCount - 1) / 2) - transform.position;
         }
     }
 
