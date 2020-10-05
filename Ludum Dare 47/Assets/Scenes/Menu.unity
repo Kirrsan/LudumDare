@@ -2978,7 +2978,7 @@ MonoBehaviour:
   - clipName: InterfaceClick
     clip:
     - {fileID: 8300000, guid: 2b988a1d99c1aa442932ee1ccb8c757c, type: 3}
-    volume: 1
+    volume: 0.05
     priority: 0
     loop: 0
     source: {fileID: 0}
