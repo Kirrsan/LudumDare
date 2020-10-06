@@ -79,6 +79,7 @@ public class InterfaceManager : MonoBehaviour
 
     private void GoToWin()
     {
+        Time.timeScale = 0;
         _gamePanel.SetActive(false);
         _pausePanel.SetActive(false);
         _winPanel.SetActive(true);

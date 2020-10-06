@@ -304,6 +304,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  doubleJumpSections: []
   sectionTxt: {fileID: 0}
 --- !u!1 &5608119999857927708
 GameObject:
@@ -435,3 +436,4 @@ MonoBehaviour:
   - skybox: {fileID: 2100000, guid: 2bd8959f5fbd3644aa33af1a155fc147, type: 2}
     color: {r: 0.9150943, g: 0.5551265, b: 0.43596473, a: 1}
     gameObjects: {fileID: 0}
+  _deactivateSectionManager: {fileID: 392575474300413109}
