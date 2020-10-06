@@ -3,7 +3,37 @@ guid: 8440d0d4884465340bbc04a74a95a163
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bois peint
+    second: {fileID: 2100000, guid: 540e717b42c5659458ab830de786c15a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Brique
+    second: {fileID: 2100000, guid: 427f98f6d0c86c34b897518e9a77b9b2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Briques 02
+    second: {fileID: 2100000, guid: 9df6338320d3e3b4d8fd526c91eff86b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Metal
+    second: {fileID: 2100000, guid: e7c788edfdb9806489d7b7b30fa112a2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tuiles
+    second: {fileID: 2100000, guid: c4feab075e4797446ae553d1dbecdb8f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Vitre
+    second: {fileID: 2100000, guid: 53a93f94b0e17d54eaa9bf51178479d9, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0

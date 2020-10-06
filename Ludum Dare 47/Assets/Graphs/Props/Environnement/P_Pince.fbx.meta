@@ -3,7 +3,22 @@ guid: d3cab33e1c0b7dc448aff1fd2a71aa92
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Engrenage
+    second: {fileID: 2100000, guid: 0a2d8263bfde5ae44ad51f477450f83a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Metal Pince
+    second: {fileID: 2100000, guid: 812b244528659d649adc8f39a9af91b8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Metal jaune
+    second: {fileID: 2100000, guid: 2244adf5a9a015c45832fed63d9224e2, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
