@@ -20,6 +20,8 @@ public class BlockSpawnAnimation : MonoBehaviour {
 
     private float xOffset;
 
+    private float cachedValue = -1;
+
     private void Start() {
         if (!player)
             player = FindObjectOfType<PlayerMovement>();
@@ -35,10 +37,8 @@ public class BlockSpawnAnimation : MonoBehaviour {
     }
 
     private void Update() {
-        if (targetPosition.z < player.transform.position.z) {
-            SetValue(1);
+        if (targetPosition.z < player.transform.position.z - 5)
             return;
-        }
 
         var dist = targetPosition.z - player.transform.position.z;
         var speed = player.speedMultiplier == 0f ? player.BaseSpeed : player.Speed;
@@ -49,10 +49,8 @@ public class BlockSpawnAnimation : MonoBehaviour {
         var minDist = 2 * speed;
         var maxDist = 4 * speed;
 
-        if (dist > maxDist) {
-            SetValue(0);
+        if (dist > maxDist)
             return;
-        }
 
         var distRelativeClamped = Mathf.InverseLerp(maxDist, minDist, dist);
 
@@ -62,6 +60,9 @@ public class BlockSpawnAnimation : MonoBehaviour {
     }
 
     private void SetValue(float value) {
+        if (value == cachedValue)
+            return;
+        cachedValue = value;
         if (portal)
             portal.SetIndex(value > 0 ? LevelManager.instance.CurrentWorld : -1);
         foreach (var renderer in renderers)
