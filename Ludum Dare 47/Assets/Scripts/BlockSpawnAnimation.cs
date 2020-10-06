@@ -5,12 +5,6 @@ using Random = UnityEngine.Random;
 public class BlockSpawnAnimation : MonoBehaviour {
     private static PlayerMovement player;
 
-    private enum Mode {
-        RotateFromBottom,
-        DropFromTop
-    }
-
-    [SerializeField] private Mode mode;
     [SerializeField] private AnimationCurve curve;
 
     private Vector3 targetPosition;
@@ -64,13 +58,13 @@ public class BlockSpawnAnimation : MonoBehaviour {
     }
 
     private void SetValue(float value) {
+        if (portal)
+            portal.SetIndex(value > 0 ? LevelManager.instance.CurrentWorld : -1);
+
         if (Math.Abs(value - cachedValue) < 0.0001f)
             return;
 
         cachedValue = value;
-
-        if (portal)
-            portal.SetIndex(value > 0 ? LevelManager.instance.CurrentWorld : -1);
 
         foreach (var renderer in renderers)
             renderer.enabled = value > 0;
