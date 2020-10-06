@@ -37,7 +37,7 @@ public class BlockSpawnAnimation : MonoBehaviour {
             return;
 
         var dist = targetPosition.z - player.transform.position.z;
-        var speed = player.speedMultiplier == 0f ? player.BaseSpeed : player.Speed;
+        var speed = player.Speed;
 
         if (portal)
             dist += 1.5f * speed;

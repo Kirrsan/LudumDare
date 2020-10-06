@@ -30,6 +30,9 @@ public class PlayerController : MonoBehaviour {
     private PlayerMovement playerMovement;
     public PlayerMovement PlayerMovement => playerMovement;
 
+    private bool isFalling;
+    public bool IsFalling => isFalling;
+
     public LayerMask Ground => ground;
 
     [SerializeField] private GameObject[] reactors;
@@ -50,10 +53,11 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void Update() {
-        if ((playerMovement.isStuck || playerMovement.speedMultiplier == 0f) && IsTouchingGround && levelManager.CurrentWorld == 0) {
+        if ((playerMovement.isStuck || isFalling) && IsTouchingGround && levelManager.CurrentWorld == 0) {
             animator.Play("Landing");
             playerMovement.speedMultiplier = 1f;
             playerMovement.isStuck = false;
+            isFalling = false;
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && !playerMovement.isStuck)
@@ -62,7 +66,6 @@ public class PlayerController : MonoBehaviour {
         if (CheckLoseCondition()) {
             AudioManager.instance.Play("Rewind");
             if (levelManager.onReset != null) levelManager.onReset.Invoke();
-            FindObjectOfType<CameraFollow>().transform.position += respawnPosition - transform.position;
             Reset();
             levelManager.Reset();
         }
@@ -79,9 +82,17 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void Reset() {
-        transform.position = respawnPosition;
+        var fallDistanceY = respawnPosition.y - 1;
+        var fallDuration = Mathf.Sqrt(2 * fallDistanceY / -Physics.gravity.y);
+        var fallDistanceZ = fallDuration * playerMovement.Speed;
+
+        var camera = FindObjectOfType<CameraFollow>();
+        var cameraOffset = camera.transform.position - transform.position;
+        transform.position = respawnPosition + fallDistanceZ * Vector3.back;
+        camera.transform.position = transform.position + cameraOffset;
+
         deactivateSectionManager.ResetSections();
-        playerMovement.speedMultiplier = 0f;
+        isFalling = true;
         Rigidbody.velocity = new Vector3(0, Rigidbody.velocity.y, 0);
         transform.rotation = Quaternion.identity;
         reactors[0].SetActive(true);

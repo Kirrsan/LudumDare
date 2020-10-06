@@ -29,7 +29,7 @@ public class CameraFollow : MonoBehaviour {
 
         speedMultiplier = Mathf.Lerp(speedMultiplier, playerController.PlayerMovement.speedMultiplier, lerpAmount);
 
-        if (playerController.transform.position.y < -1f || playerController.PlayerMovement.speedMultiplier == 0f)
+        if (playerController.transform.position.y < -2f || playerController.IsFalling)
             transform.forward = Vector3.Lerp(
                 transform.forward,
                 playerController.transform.position - transform.position,
