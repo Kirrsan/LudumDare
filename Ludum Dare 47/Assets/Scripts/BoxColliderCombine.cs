@@ -39,7 +39,7 @@ public class BoxColliderCombine : MonoBehaviour {
             var tileCount = 1;
 
             while (i < colliders.Length - 1 && CanBeCombined(previousTile, nextTile)) {
-                nextTile.enabled = false;
+                Destroy(nextTile);
                 tileCount++;
                 previousTile = nextTile;
                 nextTile = colliders[++i];
@@ -48,11 +48,11 @@ public class BoxColliderCombine : MonoBehaviour {
             if (tileCount == 1)
                 continue;
 
-            tile.enabled = false;
-
             var collider = world.gameObject.AddComponent<BoxCollider>();
             collider.size = new Vector3(bounds.size.x, bounds.size.y, tileCount * bounds.size.z);
             collider.center = tile.transform.position + bounds.center + Vector3.forward * (bounds.size.z * (tileCount - 1) / 2) - world.transform.position;
+
+            Destroy(tile);
         }
     }
 

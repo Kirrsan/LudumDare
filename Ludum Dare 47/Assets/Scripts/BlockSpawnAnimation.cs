@@ -1,14 +1,10 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class BlockSpawnAnimation : MonoBehaviour {
     private static PlayerMovement player;
 
-    private enum Mode {
-        RotateFromBottom,
-        DropFromTop
-    }
-
-    [SerializeField] private Mode mode;
     [SerializeField] private AnimationCurve curve;
 
     private Vector3 targetPosition;
@@ -19,6 +15,8 @@ public class BlockSpawnAnimation : MonoBehaviour {
     private Portal portal;
 
     private float xOffset;
+
+    private float cachedValue = -1;
 
     private void Start() {
         if (!player)
@@ -35,19 +33,17 @@ public class BlockSpawnAnimation : MonoBehaviour {
     }
 
     private void Update() {
-        if (targetPosition.z < player.transform.position.z) {
-            SetValue(1);
+        if (targetPosition.z < player.transform.position.z - 5)
             return;
-        }
 
         var dist = targetPosition.z - player.transform.position.z;
-        var speed = player.speedMultiplier == 0f ? player.BaseSpeed : player.Speed;
+        var speed = player.Speed;
 
         if (portal)
             dist += 1.5f * speed;
 
         var minDist = 2 * speed;
-        var maxDist = 4 * speed;
+        var maxDist = 5 * speed;
 
         if (dist > maxDist) {
             SetValue(0);
@@ -64,27 +60,29 @@ public class BlockSpawnAnimation : MonoBehaviour {
     private void SetValue(float value) {
         if (portal)
             portal.SetIndex(value > 0 ? LevelManager.instance.CurrentWorld : -1);
+
+        if (Math.Abs(value - cachedValue) < 0.0001f)
+            return;
+
+        cachedValue = value;
+
         foreach (var renderer in renderers)
             renderer.enabled = value > 0;
 
-        switch (mode) {
-            case Mode.RotateFromBottom:
-                transform.position = new Vector3(
-                    targetPosition.x,
-                    targetPosition.y - 50 * (1 - Mathf.Sin(value * Mathf.PI / 2)),
-                    targetPosition.z + 50 * Mathf.Cos(value * Mathf.PI / 2)
-                );
-                transform.eulerAngles = targetAngle + (1 - value) * 90 * Vector3.right;
-                break;
-
-            case Mode.DropFromTop:
-                transform.position = new Vector3(
-                    targetPosition.x + (1 - value) * xOffset,
-                    targetPosition.y + (1 - value) * 50,
-                    targetPosition.z
-                );
-                transform.eulerAngles = targetAngle + (1 - value) * 9 * xOffset * Vector3.up;
-                break;
+        if (portal) {
+            transform.position = new Vector3(
+                targetPosition.x + (1 - value) * xOffset,
+                targetPosition.y + (1 - value) * 50,
+                targetPosition.z
+            );
+            transform.eulerAngles = targetAngle + (1 - value) * 9 * xOffset * Vector3.up;
+        } else {
+            transform.position = new Vector3(
+                targetPosition.x,
+                targetPosition.y - 50 * (1 - Mathf.Sin(value * Mathf.PI / 2)),
+                targetPosition.z + 50 * Mathf.Cos(value * Mathf.PI / 2)
+            );
+            transform.eulerAngles = targetAngle + (1 - value) * 90 * Vector3.right;
         }
     }
 }
