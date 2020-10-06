@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class BlockSpawnAnimation : MonoBehaviour {
     private static PlayerMovement player;
@@ -47,10 +49,12 @@ public class BlockSpawnAnimation : MonoBehaviour {
             dist += 1.5f * speed;
 
         var minDist = 2 * speed;
-        var maxDist = 4 * speed;
+        var maxDist = 5 * speed;
 
-        if (dist > maxDist)
+        if (dist > maxDist) {
+            SetValue(0);
             return;
+        }
 
         var distRelativeClamped = Mathf.InverseLerp(maxDist, minDist, dist);
 
@@ -60,32 +64,31 @@ public class BlockSpawnAnimation : MonoBehaviour {
     }
 
     private void SetValue(float value) {
-        if (value == cachedValue)
+        if (Math.Abs(value - cachedValue) < 0.0001f)
             return;
+
         cachedValue = value;
+
         if (portal)
             portal.SetIndex(value > 0 ? LevelManager.instance.CurrentWorld : -1);
+
         foreach (var renderer in renderers)
             renderer.enabled = value > 0;
 
-        switch (mode) {
-            case Mode.RotateFromBottom:
-                transform.position = new Vector3(
-                    targetPosition.x,
-                    targetPosition.y - 50 * (1 - Mathf.Sin(value * Mathf.PI / 2)),
-                    targetPosition.z + 50 * Mathf.Cos(value * Mathf.PI / 2)
-                );
-                transform.eulerAngles = targetAngle + (1 - value) * 90 * Vector3.right;
-                break;
-
-            case Mode.DropFromTop:
-                transform.position = new Vector3(
-                    targetPosition.x + (1 - value) * xOffset,
-                    targetPosition.y + (1 - value) * 50,
-                    targetPosition.z
-                );
-                transform.eulerAngles = targetAngle + (1 - value) * 9 * xOffset * Vector3.up;
-                break;
+        if (portal) {
+            transform.position = new Vector3(
+                targetPosition.x + (1 - value) * xOffset,
+                targetPosition.y + (1 - value) * 50,
+                targetPosition.z
+            );
+            transform.eulerAngles = targetAngle + (1 - value) * 9 * xOffset * Vector3.up;
+        } else {
+            transform.position = new Vector3(
+                targetPosition.x,
+                targetPosition.y - 50 * (1 - Mathf.Sin(value * Mathf.PI / 2)),
+                targetPosition.z + 50 * Mathf.Cos(value * Mathf.PI / 2)
+            );
+            transform.eulerAngles = targetAngle + (1 - value) * 90 * Vector3.right;
         }
     }
 }

@@ -56,6 +56,7 @@ MonoBehaviour:
   portalVFX:
   - {fileID: 7850574104730495848, guid: 56f391360e359ce408f1b0c391c5e81d, type: 3}
   - {fileID: 3603997668301903053, guid: 1b03138d01f8be24ebbe5fefb15cbbe7, type: 3}
+  deactivateSectionManager: {fileID: 0}
 --- !u!33 &6346340933302790380
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -414,7 +415,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Plateforme_sol_01
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2194345504699721319, guid: 234d3ee8275e76548b13dc6cf41f601b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 234d3ee8275e76548b13dc6cf41f601b, type: 3}
 --- !u!4 &37929616980689638 stripped
 Transform:
