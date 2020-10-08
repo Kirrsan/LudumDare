@@ -65,7 +65,8 @@ public class PlayerController : MonoBehaviour {
 
         if (CheckLoseCondition()) {
             AudioManager.instance.Play("Rewind");
-            if (levelManager.onReset != null) levelManager.onReset.Invoke();
+            if (levelManager.onReset != null)
+                levelManager.onReset.Invoke();
             Reset();
             levelManager.Reset();
         }
@@ -82,9 +83,12 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void Reset() {
-        var fallDistanceY = respawnPosition.y - 1;
-        var fallDuration = Mathf.Sqrt(2 * fallDistanceY / -Physics.gravity.y);
-        var fallDistanceZ = fallDuration * playerMovement.Speed;
+        var d = respawnPosition.y - 1;
+        var v = -rigidbody.velocity.y;
+        var g = -Physics.gravity.y;
+        var fallDuration = (-v + Mathf.Sqrt(2 * g * d + v * v)) / g;
+        Debug.Log(fallDuration);
+        var fallDistanceZ = fallDuration * rigidbody.velocity.z;
 
         var camera = FindObjectOfType<CameraFollow>();
         var cameraOffset = camera.transform.position - transform.position;
@@ -93,7 +97,6 @@ public class PlayerController : MonoBehaviour {
 
         deactivateSectionManager.ResetSections();
         isFalling = true;
-        Rigidbody.velocity = new Vector3(0, Rigidbody.velocity.y, 0);
         transform.rotation = Quaternion.identity;
         reactors[0].SetActive(true);
         reactors[1].SetActive(false);
