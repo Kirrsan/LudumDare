@@ -60,8 +60,21 @@ public class PlayerController : MonoBehaviour {
             isFalling = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && !playerMovement.isStuck)
-            Capacity.Use(this);
+        if (!playerMovement.isStuck)
+        {
+            if(Input.GetKeyDown(KeyCode.Space))
+                Capacity.Use(this);
+#if UNITY_ANDROID
+            foreach (Touch touch in Input.touches)
+            {
+                if (touch.phase == TouchPhase.Began)
+                {
+                    Capacity.Use(this);
+                    break;
+                }
+            }
+#endif
+        }
 
         if (CheckLoseCondition()) {
             AudioManager.instance.Play("Rewind");
