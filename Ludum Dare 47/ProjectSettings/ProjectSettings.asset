@@ -248,8 +248,8 @@ PlayerSettings:
   AndroidTargetArchitectures: 3
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: '{inproject}: Cornowliu''s_Path_NewKeystore.keystore'
-  AndroidKeyaliasName: cornowliu's_path
+  AndroidKeystoreName: '{inproject}: Cornowlius_Path_NewKeystore.keystore'
+  AndroidKeyaliasName: upload
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 0
   AndroidIsGame: 1
