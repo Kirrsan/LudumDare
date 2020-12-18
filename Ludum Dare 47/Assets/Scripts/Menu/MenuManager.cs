@@ -30,8 +30,6 @@ public class MenuManager : MonoBehaviour
         DeterminPlatform();
         if (currentPlatform == RuntimePlatform.Android) { DisplayMobileCanvas(); }
         else { DisplayPCCanvas(); }
-        Debug.Log(currentPlatform);
-        Debug.Log(UnityEditor.EditorUserBuildSettings.activeBuildTarget);
         _currentSelectedObject = _eventSystem.currentSelectedGameObject;
         _lastSelectedObject = _currentSelectedObject;
     }
