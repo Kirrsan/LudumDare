@@ -6,25 +6,32 @@ using System.Collections;
 
 public class MenuManager : MonoBehaviour
 {
-    [SerializeField] private GameObject _basePanel;
-    [SerializeField] private GameObject _optionsPanel;
-    [SerializeField] private int _sceneToLoad = 1;
+    [SerializeField] private GameObject _PCCanvas;
+    [SerializeField] private GameObject _MobileCanvas;
+    [SerializeField] private GameObject[] _basePanel = new GameObject[2];
+    [SerializeField] private GameObject[] _optionsPanel = new GameObject[2];
+
     
-    [SerializeField] private Button _playButton;
-    [SerializeField] private Button _creditsButton;
-    [SerializeField] private Button _backButton;
+    [SerializeField] private Button[] _playButton = new Button[2];
+    [SerializeField] private Button[] _creditsButton = new Button[2];
+    [SerializeField] private Button[] _backButton = new Button[2];
 
     [SerializeField] private EventSystem _eventSystem;
-
+    [SerializeField] private int _sceneToLoad = 1;
     private GameObject _lastSelectedObject;
     private GameObject _currentSelectedObject;
+
+    //Android Version uses index 1, PC uses 0
+    private RuntimePlatform currentPlatform;
 
     // Start is called before the first frame update
     private void Start()
     {
-        _optionsPanel.SetActive(false);
-        _basePanel.SetActive(true);
-        _playButton.Select();
+        DeterminPlatform();
+        if (currentPlatform == RuntimePlatform.Android) { DisplayMobileCanvas(); }
+        else { DisplayPCCanvas(); }
+        Debug.Log(currentPlatform);
+        Debug.Log(UnityEditor.EditorUserBuildSettings.activeBuildTarget);
         _currentSelectedObject = _eventSystem.currentSelectedGameObject;
         _lastSelectedObject = _currentSelectedObject;
     }
@@ -43,6 +50,32 @@ public class MenuManager : MonoBehaviour
         }
     }
 
+    void DeterminPlatform()
+    {
+        currentPlatform = Application.platform;
+#if UNITY_EDITOR
+        if (UnityEditor.EditorUserBuildSettings.activeBuildTarget == UnityEditor.BuildTarget.Android)
+            currentPlatform = RuntimePlatform.Android;
+        else
+            currentPlatform = RuntimePlatform.WindowsPlayer;
+#endif
+    }
+    void DisplayPCCanvas()
+    {
+        _PCCanvas.SetActive(true);
+        _MobileCanvas.SetActive(false);
+        _optionsPanel[0].SetActive(false);
+        _basePanel[0].SetActive(true);
+        _playButton[0].Select();
+    }
+    void DisplayMobileCanvas()
+    {
+        _PCCanvas.SetActive(false);
+        _MobileCanvas.SetActive(true);
+        _optionsPanel[1].SetActive(false);
+        _basePanel[1].SetActive(true);
+        _playButton[1].Select();
+    }
     public void Play()
     {
         AudioManager.instance.Play("InterfaceSelected");
@@ -57,18 +90,36 @@ public class MenuManager : MonoBehaviour
 
     public void GoToBasePanel()
     {
-        _basePanel.SetActive(true);
-        _optionsPanel.SetActive(false);
-        _backButton.GetComponent<ShowText>().ResetRotation();
-        _lastSelectedObject.GetComponent<Button>().Select();
+        if(currentPlatform == RuntimePlatform.Android)
+        {
+            _basePanel[1].SetActive(true);
+            _optionsPanel[1].SetActive(false);
+            _backButton[1].GetComponent<ShowText>().ResetRotation();
+        }
+        else
+        {
+            _basePanel[0].SetActive(true);
+            _optionsPanel[0].SetActive(false);
+            _backButton[0].GetComponent<ShowText>().ResetRotation();
+            _lastSelectedObject.GetComponent<Button>().Select();
+        }
     }
 
     public void Options()
     {
-        _basePanel.SetActive(false);
-        _optionsPanel.SetActive(true);
-        _creditsButton.GetComponent<ShowText>().ResetRotation();
-        _backButton.Select();
+        if (currentPlatform == RuntimePlatform.Android)
+        {
+            _basePanel[1].SetActive(false);
+            _optionsPanel[1].SetActive(true);
+            _creditsButton[1].GetComponent<ShowText>().ResetRotation();
+        }
+        else
+        {
+            _basePanel[0].SetActive(false);
+            _optionsPanel[0].SetActive(true);
+            _creditsButton[0].GetComponent<ShowText>().ResetRotation();
+            _backButton[0].Select();
+        }
     }
 
     public void Quit()
